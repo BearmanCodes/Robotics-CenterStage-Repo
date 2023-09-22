@@ -25,7 +25,7 @@ public class Mason extends LinearOpMode {
             }
             if (currentGamepad.a && !previousGamepad.a){ //Change to A once I get back
                 servoPos = 0.85;
-                frogo.  q(servoPos);
+                frogo.setPosition(servoPos);
             }
             if (currentGamepad.b && !previousGamepad.b){ //Change to A once I get back
                 servoPos = 0.05;
