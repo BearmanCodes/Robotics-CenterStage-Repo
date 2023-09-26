@@ -3,8 +3,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name="ShawnDrive")
 public class ShawnDrive extends LinearOpMode {
@@ -12,17 +14,38 @@ public class ShawnDrive extends LinearOpMode {
     DcMotorEx frontright;
     DcMotorEx backleft;
     DcMotorEx backright;
+    double reducer = 0.65;
 
     @Override
     public void runOpMode() throws InterruptedException {
         initialize();
         waitForStart();
         while (opModeIsActive()){
-            frontright.setPower(1.0);
-            frontleft.setPower(1.0);
-            backleft.setPower(1.0);
-            backright.setPower(1.0);
+            froggy();
         }
+    }
+
+    public void allMotorPower(double power){
+        frontright.setPower(power);
+        frontleft.setPower(power);
+        backleft.setPower(power);
+        backright.setPower(power);
+    }
+
+    public void froggy(){
+        double Vertical = gamepad1.left_stick_y;
+        double Horizontal = gamepad1.left_stick_x * 1.2;
+        double Pivot = gamepad1.right_stick_x;
+
+        double frontLeftPower = (-Pivot + (Vertical - Horizontal)) * reducer;
+        double frontRightPower = (Pivot + Vertical + Horizontal) * reducer;
+        double backRightPower = (Pivot + (Vertical - Horizontal)) * reducer;
+        double backLeftPower = (-Pivot + Vertical + Horizontal) * reducer;
+
+        frontleft.setPower(frontLeftPower);
+        frontright.setPower(frontRightPower);
+        backleft.setPower(backLeftPower);
+        backright.setPower(backRightPower);
     }
 
     private void initialize(){
@@ -30,6 +53,11 @@ public class ShawnDrive extends LinearOpMode {
         frontright = hardwareMap.get(DcMotorEx.class, "frontright");
         backleft = hardwareMap.get(DcMotorEx.class, "backleft");
         backright = hardwareMap.get(DcMotorEx.class, "backright");
+
+        frontleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         frontright.setDirection(DcMotorSimple.Direction.REVERSE);
         frontleft.setDirection(DcMotorSimple.Direction.FORWARD);
