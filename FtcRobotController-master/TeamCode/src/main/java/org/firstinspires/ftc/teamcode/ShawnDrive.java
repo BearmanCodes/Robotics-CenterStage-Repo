@@ -14,7 +14,7 @@ public class ShawnDrive extends LinearOpMode {
     DcMotorEx frontright;
     DcMotorEx backleft;
     DcMotorEx backright;
-    double reducer = 0.65;
+    double reducer = 0.80;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -59,10 +59,10 @@ public class ShawnDrive extends LinearOpMode {
         backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        frontright.setDirection(DcMotorSimple.Direction.REVERSE);
-        frontleft.setDirection(DcMotorSimple.Direction.FORWARD);
-        backright.setDirection(DcMotorSimple.Direction.REVERSE);
-        backleft.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontright.setDirection(DcMotorSimple.Direction.FORWARD);
+        frontleft.setDirection(DcMotorSimple.Direction.REVERSE);
+        backright.setDirection(DcMotorSimple.Direction.FORWARD);
+        backleft.setDirection(DcMotorSimple.Direction.FORWARD);
 
     }
 }
