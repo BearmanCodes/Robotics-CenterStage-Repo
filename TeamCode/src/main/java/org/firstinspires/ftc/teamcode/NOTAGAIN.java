@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-@Disabled
 @TeleOp(name = "NOTAGAIN")
 public class NOTAGAIN extends LinearOpMode {
     @Override
@@ -12,7 +11,7 @@ public class NOTAGAIN extends LinearOpMode {
         DcMotorEx bee = hardwareMap.get(DcMotorEx.class, "froggy");
         waitForStart();
         while (opModeIsActive()){
-            bee.setPower(1);
+            bee.setPower(0.3);
         }
     }
 }
