@@ -39,7 +39,7 @@ public class ShawnDrive extends LinearOpMode {
         double frontRightPower = (Pivot + Vertical + Horizontal) * reducer;
         double backRightPower = (Pivot + (Vertical - Horizontal)) * reducer;
         double backLeftPower = (-Pivot + Vertical + Horizontal) * reducer;
-        while (gamepad1.b){
+        /*Brake code Klarissa added */ while (gamepad1.b){
             allMotorPower(0);
         }
         frontleft.setPower(frontLeftPower);
