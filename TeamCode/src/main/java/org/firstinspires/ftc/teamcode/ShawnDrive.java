@@ -7,12 +7,12 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
-public class E extends LinearOpMode {
+public class ShawnDrive extends LinearOpMode {
     DcMotorEx frontleft;
     DcMotorEx frontright;
     DcMotorEx backleft;
     DcMotorEx backright;
-    double reducer = 0.80;
+    double reducer = 1;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -39,11 +39,14 @@ public class E extends LinearOpMode {
         double frontRightPower = (Pivot + Vertical + Horizontal) * reducer;
         double backRightPower = (Pivot + (Vertical - Horizontal)) * reducer;
         double backLeftPower = (-Pivot + Vertical + Horizontal) * reducer;
-
+        while (gamepad1.b){
+            allMotorPower(0);
+        }
         frontleft.setPower(frontLeftPower);
         frontright.setPower(frontRightPower);
         backleft.setPower(backLeftPower);
         backright.setPower(backRightPower);
+
     }
 
     private void Init(){
