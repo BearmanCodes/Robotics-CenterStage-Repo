@@ -66,9 +66,7 @@ public class IMURUN extends LinearOpMode {
         waitForStart();
 
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        sleep(10);
-        while (opModeIsActive()){
-            setMotorVelocity(-560, 560, -560, 560);
+        if (opModeIsActive()){
             robotOrientation = imu.getRobotYawPitchRollAngles();
             myRobotAngularVelocity = imu.getRobotAngularVelocity(AngleUnit.DEGREES);
 
@@ -78,13 +76,42 @@ public class IMURUN extends LinearOpMode {
             double Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
             double Pitch = robotOrientation.getPitch(AngleUnit.DEGREES);
             double Roll  = robotOrientation.getRoll(AngleUnit.DEGREES);
-            telemetry.addData("Yaw: ", Yaw);
-            telemetry.addData("Pitch: ", Pitch);
-            telemetry.addData("Roll: ", Roll);
-            telemetry.addData("zRate: ", zRotationRate);
-            telemetry.addData("xRate: ", xRotationRate);
-            telemetry.addData("yRate: ", yRotationRate);
+            if (opModeIsActive()){
+                while (Yaw > -90) {
+
+                    setMotorVelocity(300, -300, 300, -300);
+                    robotOrientation = imu.getRobotYawPitchRollAngles();
+                    Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
+                    telemetry.addData("Yaw:", "%.2f", Yaw);
+                    telemetry.update();
+                }
+                allMotorVelocity(0);
+                if (Yaw < -90) {
+                    robotOrientation = imu.getRobotYawPitchRollAngles();
+                    Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
+                    double error = Yaw - -90;
+                    while (Math.abs(error) > 0.2){
+                        setMotorVelocity(-300, 300, -300, 300);
+                        robotOrientation = imu.getRobotYawPitchRollAngles();
+                        Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
+                        error = Yaw - 90;
+                        telemetry.addData("Error: ", "%.2f", error);
+                        telemetry.addData("Yaw:", "%.2f", Yaw);
+                        telemetry.update();
+                    }
+                    allMotorVelocity(0);
+                }
+            }
+
+            /*
+            telemetry.addData("Yaw:", "%.2f", Yaw);
+            telemetry.addData("Pitch: ", "%.2f", Pitch);
+            telemetry.addData("Roll: ", "%.2f", Roll);
+            telemetry.addData("zRate: ", "%.2f", zRotationRate);
+            telemetry.addData("xRate: ", "%.2f", xRotationRate);
+            telemetry.addData("yRate: ", "%.2f", yRotationRate);
             telemetry.update();
+             */
         }
         /*
         Drive(565, 6,6,6,6, 2);
