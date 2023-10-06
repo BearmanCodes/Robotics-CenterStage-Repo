@@ -78,7 +78,6 @@ public class IMURUN extends LinearOpMode {
             double Roll  = robotOrientation.getRoll(AngleUnit.DEGREES);
             if (opModeIsActive()){
                 while (Yaw > -90) {
-
                     setMotorVelocity(300, -300, 300, -300);
                     robotOrientation = imu.getRobotYawPitchRollAngles();
                     Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
