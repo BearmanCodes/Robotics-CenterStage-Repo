@@ -8,14 +8,13 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name = "ServoTest")
 public class servo extends LinearOpMode {
-    Servo frogo;
+    Servo servo;
     Gamepad currentGamepad = new Gamepad();
     Gamepad previousGamepad = new Gamepad();
     double servoPos;
     @Override
     public void runOpMode() throws InterruptedException {
-        frogo = hardwareMap.get(Servo.class, "servoTest");
-        //Start pos: 0.85
+        servo = hardwareMap.get(Servo.class, "servo");
         waitForStart();
         while (opModeIsActive()){
             try {
@@ -26,19 +25,19 @@ public class servo extends LinearOpMode {
             if (currentGamepad.a && !previousGamepad.a){ //Change to A once I get back
                 servoPos += 0.01;
                 telemetry.addData("servoPos: ", servoPos);
-                telemetry.addData("currentPos: ", frogo.getPosition());
+                telemetry.addData("currentPos: ", servo.getPosition());
                 telemetry.update();
             }
             if (currentGamepad.b && !previousGamepad.b){ //Change to A once I get back
                 servoPos -= 0.01;
                 telemetry.addData("servoPos: ", servoPos);
-                telemetry.addData("currentPos: ", frogo.getPosition());
+                telemetry.addData("currentPos: ", servo.getPosition());
                 telemetry.update();
             }
             if (currentGamepad.y && !previousGamepad.y){
-                frogo.setPosition(servoPos);
+                servo.setPosition(servoPos);
                 telemetry.addData("servoPos", servoPos);
-                telemetry.addData("currentPos", frogo.getPosition());
+                telemetry.addData("currentPos", servo.getPosition());
                 telemetry.update();
             }
         }
@@ -46,6 +45,6 @@ public class servo extends LinearOpMode {
 
     public void edgeDetector() throws RobotCoreException {
         previousGamepad.copy(currentGamepad);
-        currentGamepad.copy(gamepad2);
+        currentGamepad.copy(gamepad1);
     }
 }
