@@ -14,32 +14,10 @@ public class servo extends LinearOpMode {
     double servoPos;
     @Override
     public void runOpMode() throws InterruptedException {
-        servo = hardwareMap.get(Servo.class, "servo");
+        servo = hardwareMap.get(Servo.class, "SeRVoTeSt".toLowerCase());
         waitForStart();
         while (opModeIsActive()){
-            try {
-                edgeDetector();
-            } catch (RobotCoreException e) {
-                e.printStackTrace();
-            }
-            if (currentGamepad.a && !previousGamepad.a){ //Change to A once I get back
-                servoPos += 0.01;
-                telemetry.addData("servoPos: ", servoPos);
-                telemetry.addData("currentPos: ", servo.getPosition());
-                telemetry.update();
-            }
-            if (currentGamepad.b && !previousGamepad.b){ //Change to A once I get back
-                servoPos -= 0.01;
-                telemetry.addData("servoPos: ", servoPos);
-                telemetry.addData("currentPos: ", servo.getPosition());
-                telemetry.update();
-            }
-            if (currentGamepad.y && !previousGamepad.y){
-                servo.setPosition(servoPos);
-                telemetry.addData("servoPos", servoPos);
-                telemetry.addData("currentPos", servo.getPosition());
-                telemetry.update();
-            }
+            servo.setPosition(1);
         }
     }
 

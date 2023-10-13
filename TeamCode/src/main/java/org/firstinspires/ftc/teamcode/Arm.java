@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 public class Arm extends LinearOpMode {
     private DcMotorEx left, right;
 
-    public double reducer = 1.;
+    public double reducer = 0.8;
     public double armPower;
     @Override
     public void runOpMode() throws InterruptedException {
