@@ -2,9 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.exception.RobotCoreException;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 @TeleOp
 public class ShawnDrive extends LinearOpMode {
@@ -12,7 +14,13 @@ public class ShawnDrive extends LinearOpMode {
     DcMotorEx frontright;
     DcMotorEx backleft;
     DcMotorEx backright;
-    double reducer = 1;
+
+    Gamepad currentGamepad = new Gamepad();
+    Gamepad previousGamepad = new Gamepad();
+
+    Gamepad.RumbleEffect effect;
+
+    double reducer = 0.75;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -39,7 +47,7 @@ public class ShawnDrive extends LinearOpMode {
         double frontRightPower = (Pivot + Vertical + Horizontal) * reducer;
         double backRightPower = (Pivot + (Vertical - Horizontal)) * reducer;
         double backLeftPower = (-Pivot + Vertical + Horizontal) * reducer;
-        /*Brake code Klarissa added */ while (gamepad1.b){
+        /*Brake code Klarissa added */ while (gamepad1.circle){
             allMotorPower(0);
         }
         frontleft.setPower(frontLeftPower);
@@ -55,6 +63,11 @@ public class ShawnDrive extends LinearOpMode {
         backleft = hardwareMap.get(DcMotorEx.class, "backleft");
         backright = hardwareMap.get(DcMotorEx.class, "backright");
 
+        effect = new Gamepad.RumbleEffect.Builder()
+                .addStep(1.0, 1.0, 2000)
+
+                .build();
+
         frontleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         frontright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backleft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -65,5 +78,10 @@ public class ShawnDrive extends LinearOpMode {
         backright.setDirection(DcMotorSimple.Direction.FORWARD);
         backleft.setDirection(DcMotorSimple.Direction.FORWARD);
 
+    }
+
+    public void edgeDetector() throws RobotCoreException {
+        previousGamepad.copy(currentGamepad);
+        currentGamepad.copy(gamepad1);
     }
 }
