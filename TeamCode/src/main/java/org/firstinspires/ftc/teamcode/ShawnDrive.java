@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
 public class ShawnDrive extends LinearOpMode {
@@ -14,6 +15,15 @@ public class ShawnDrive extends LinearOpMode {
     DcMotorEx frontright;
     DcMotorEx backleft;
     DcMotorEx backright;
+
+    Servo leftServo;
+
+    Servo rightServo;
+
+    private DcMotorEx left, right;
+
+    public double reducerArm = 0.4;
+    public double armPower;
 
     Gamepad currentGamepad = new Gamepad();
     Gamepad previousGamepad = new Gamepad();
@@ -27,8 +37,28 @@ public class ShawnDrive extends LinearOpMode {
         Init();
         waitForStart();
         while (opModeIsActive()) {
+            try {
+                edgeDetector();
+            } catch (RobotCoreException e) {
+                throw new RuntimeException(e);
+            }
             main();
+            arm();
+            if (currentGamepad.cross && !previousGamepad.cross){
+                leftServo.setPosition(0.25);
+                rightServo.setPosition(1);
+            }
+            if (currentGamepad.circle && !previousGamepad.circle){
+                leftServo.setPosition(0.6);
+                rightServo.setPosition(0.7);
+            }
         }
+    }
+
+    public void arm(){
+        armPower = (-gamepad2.left_trigger + gamepad2.right_trigger) * reducerArm;
+        left.setPower(armPower);
+        right.setPower(armPower);
     }
 
     public void allMotorPower(double power){
@@ -62,6 +92,14 @@ public class ShawnDrive extends LinearOpMode {
         frontright = hardwareMap.get(DcMotorEx.class, "frontright");
         backleft = hardwareMap.get(DcMotorEx.class, "backleft");
         backright = hardwareMap.get(DcMotorEx.class, "backright");
+        rightServo = hardwareMap.get(Servo.class, "servoRight".toLowerCase());
+        leftServo = hardwareMap.get(Servo.class, "servoLeft".toLowerCase());
+
+        left = hardwareMap.get(DcMotorEx.class, "left");
+        right = hardwareMap.get(DcMotorEx.class, "right");
+        right.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        left.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        right.setDirection(DcMotorEx.Direction.REVERSE);
 
         effect = new Gamepad.RumbleEffect.Builder()
                 .addStep(1.0, 1.0, 2000)
