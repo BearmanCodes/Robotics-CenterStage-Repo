@@ -52,10 +52,15 @@ public class ShawnAuto extends LinearOpMode {
         waitForStart();
 
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        sleep(10);
+        sleep(250);
 
-        Drive(700, 12, -12, 12, -12, 12);
-        Drive(700, 12, 12, 12, 12, 12);
+        Drive(9999, 100, 100, 100, 100, 12);
+        Drive(1250, -21, 21, 21, -21, 12);
+        Drive(1500, 42, 42, 42, 42, 12);
+        Drive(2250, -70, -70, -70, -70, 3500);
+        Drive(1000, -120, 120, 120, -120, 25000);
+        Drive(1000, 120, -120, -120, 120, 25000);
+
     }
 
     public void Drive(double velocity,

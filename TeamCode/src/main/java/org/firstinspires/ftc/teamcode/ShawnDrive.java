@@ -43,7 +43,8 @@ public class ShawnDrive extends LinearOpMode {
                 throw new RuntimeException(e);
             }
             main();
-            arm();
+            //arm();
+            /*
             if (currentGamepad.cross && !previousGamepad.cross){
                 leftServo.setPosition(0.25);
                 rightServo.setPosition(1);
@@ -52,14 +53,17 @@ public class ShawnDrive extends LinearOpMode {
                 leftServo.setPosition(0.6);
                 rightServo.setPosition(0.7);
             }
+            */
         }
     }
 
+    /*
     public void arm(){
         armPower = (-gamepad2.left_trigger + gamepad2.right_trigger) * reducerArm;
         left.setPower(armPower);
         right.setPower(armPower);
     }
+     */
 
     public void allMotorPower(double power){
         frontright.setPower(power);
@@ -92,14 +96,14 @@ public class ShawnDrive extends LinearOpMode {
         frontright = hardwareMap.get(DcMotorEx.class, "frontright");
         backleft = hardwareMap.get(DcMotorEx.class, "backleft");
         backright = hardwareMap.get(DcMotorEx.class, "backright");
-        rightServo = hardwareMap.get(Servo.class, "servoRight".toLowerCase());
-        leftServo = hardwareMap.get(Servo.class, "servoLeft".toLowerCase());
+        //rightServo = hardwareMap.get(Servo.class, "servoRight".toLowerCase());
+        //leftServo = hardwareMap.get(Servo.class, "servoLeft".toLowerCase());
 
-        left = hardwareMap.get(DcMotorEx.class, "left");
-        right = hardwareMap.get(DcMotorEx.class, "right");
-        right.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        left.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        right.setDirection(DcMotorEx.Direction.REVERSE);
+        //left = hardwareMap.get(DcMotorEx.class, "left");
+        //right = hardwareMap.get(DcMotorEx.class, "right");
+        //right.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        //left.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        //right.setDirection(DcMotorEx.Direction.REVERSE);
 
         effect = new Gamepad.RumbleEffect.Builder()
                 .addStep(1.0, 1.0, 2000)
