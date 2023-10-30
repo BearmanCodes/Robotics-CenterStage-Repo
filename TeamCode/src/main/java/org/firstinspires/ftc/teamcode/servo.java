@@ -11,13 +11,14 @@ import org.checkerframework.checker.units.qual.A;
 
 @TeleOp(name = "ServoTest")
 public class servo extends LinearOpMode {
-    Servo servo;
+    Servo lservo, rservo;
     Gamepad currentGamepad = new Gamepad();
     Gamepad previousGamepad = new Gamepad();
-    double servoPos;
+    double lservoPos, rservoPos;
     @Override
     public void runOpMode() throws InterruptedException {
-        servo = hardwareMap.get(Servo.class, "SERVORIGHT".toLowerCase());
+        lservo = hardwareMap.get(Servo.class, "leftclaw".toLowerCase());
+        rservo = hardwareMap.get(Servo.class, "rightclaw".toLowerCase());
         waitForStart();
         while (opModeIsActive()){
             try {
@@ -26,21 +27,44 @@ public class servo extends LinearOpMode {
                 throw new RuntimeException(e);
             }
             if (currentGamepad.cross && !previousGamepad.cross){
-                servoPos+=0.1;
-                telemetry.addData("Servo Position", servoPos);
-                telemetry.addData("current Servo Position", servo.getPosition());
+                lservoPos +=0.1;
+                telemetry.addData("Left Servo Position", lservoPos);
+                telemetry.addData("Current Left Servo Position", lservo.getPosition());
+                telemetry.addData("Right Servo Position", rservoPos);
+                telemetry.addData("Current Right Servo Position", rservo.getPosition());
                 telemetry.update();
             }
             if (currentGamepad.circle && !previousGamepad.circle) {
-                servoPos -= 0.1;
-                telemetry.addData("Servo Position", servoPos);
-                telemetry.addData("current Servo Position", servo.getPosition());
+                lservoPos -= 0.1;
+                telemetry.addData("Left Servo Position", lservoPos);
+                telemetry.addData("Current Left Servo Position", lservo.getPosition());
+                telemetry.addData("Right Servo Position", rservoPos);
+                telemetry.addData("Current Right Servo Position", rservo.getPosition());
                 telemetry.update();
             }
             if (currentGamepad.triangle && !previousGamepad.triangle) {
-                servo.setPosition(servoPos);
-                telemetry.addData("Servo Position", servoPos);
-                telemetry.addData("current Servo Position", servo.getPosition());
+                lservo.setPosition(lservoPos);
+                rservo.setPosition(rservoPos);
+                telemetry.addData("Left Servo Position", lservoPos);
+                telemetry.addData("Current Left Servo Position", lservo.getPosition());
+                telemetry.addData("Right Servo Position", rservoPos);
+                telemetry.addData("Current Right Servo Position", rservo.getPosition());
+                telemetry.update();
+            }
+            if (currentGamepad.left_bumper && !currentGamepad.left_bumper){
+                rservoPos += 0.1;
+                telemetry.addData("Left Servo Position", lservoPos);
+                telemetry.addData("Current Left Servo Position", lservo.getPosition());
+                telemetry.addData("Right Servo Position", rservoPos);
+                telemetry.addData("Current Right Servo Position", rservo.getPosition());
+                telemetry.update();
+            }
+            if (currentGamepad.right_bumper && !currentGamepad.right_bumper) {
+                rservoPos -= 0.1;
+                telemetry.addData("Left Servo Position", lservoPos);
+                telemetry.addData("Current Left Servo Position", lservo.getPosition());
+                telemetry.addData("Right Servo Position", rservoPos);
+                telemetry.addData("Current Right Servo Position", rservo.getPosition());
                 telemetry.update();
             }
         }
@@ -49,6 +73,6 @@ public class servo extends LinearOpMode {
 
     public void edgeDetector() throws RobotCoreException {
         previousGamepad.copy(currentGamepad);
-        currentGamepad.copy(gamepad1);
+        currentGamepad.copy(gamepad2);
     }
 }

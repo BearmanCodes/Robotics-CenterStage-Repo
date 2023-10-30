@@ -22,7 +22,7 @@ public class ShawnDrive extends LinearOpMode {
 
     private DcMotorEx left, right;
 
-    public double reducerArm = 0.4;
+    public double reducerArm = 0.25;
     public double armPower;
 
     Gamepad currentGamepad = new Gamepad();
@@ -43,7 +43,7 @@ public class ShawnDrive extends LinearOpMode {
                 throw new RuntimeException(e);
             }
             main();
-            //arm();
+            arm();
             /*
             if (currentGamepad.cross && !previousGamepad.cross){
                 leftServo.setPosition(0.25);
@@ -57,13 +57,12 @@ public class ShawnDrive extends LinearOpMode {
         }
     }
 
-    /*
+
     public void arm(){
-        armPower = (-gamepad2.left_trigger + gamepad2.right_trigger) * reducerArm;
+        armPower = (-gamepad2.right_trigger + gamepad2.left_trigger) * reducerArm;
         left.setPower(armPower);
         right.setPower(armPower);
     }
-     */
 
     public void allMotorPower(double power){
         frontright.setPower(power);
@@ -99,11 +98,11 @@ public class ShawnDrive extends LinearOpMode {
         //rightServo = hardwareMap.get(Servo.class, "servoRight".toLowerCase());
         //leftServo = hardwareMap.get(Servo.class, "servoLeft".toLowerCase());
 
-        //left = hardwareMap.get(DcMotorEx.class, "left");
-        //right = hardwareMap.get(DcMotorEx.class, "right");
-        //right.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        //left.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        //right.setDirection(DcMotorEx.Direction.REVERSE);
+        left = hardwareMap.get(DcMotorEx.class, "left");
+        right = hardwareMap.get(DcMotorEx.class, "right");
+        right.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        left.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        right.setDirection(DcMotorEx.Direction.REVERSE);
 
         effect = new Gamepad.RumbleEffect.Builder()
                 .addStep(1.0, 1.0, 2000)
@@ -120,6 +119,10 @@ public class ShawnDrive extends LinearOpMode {
         backright.setDirection(DcMotorSimple.Direction.FORWARD);
         backleft.setDirection(DcMotorSimple.Direction.FORWARD);
 
+        frontright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void edgeDetector() throws RobotCoreException {
