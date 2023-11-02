@@ -12,7 +12,7 @@ import org.checkerframework.checker.units.qual.A;
 @TeleOp(name = "ServoTest")
 public class servo extends LinearOpMode {
     Servo lservo, rservo;
-    Gamepad currentGamepad = new Gamepad();
+    Gamepad currentGamepad =  new Gamepad();
     Gamepad previousGamepad = new Gamepad();
     double lservoPos, rservoPos;
     @Override
@@ -26,7 +26,7 @@ public class servo extends LinearOpMode {
             } catch (RobotCoreException e) {
                 throw new RuntimeException(e);
             }
-            if (currentGamepad.cross && !previousGamepad.cross){
+            if (currentGamepad.a && !previousGamepad.a){
                 lservoPos +=0.1;
                 telemetry.addData("Left Servo Position", lservoPos);
                 telemetry.addData("Current Left Servo Position", lservo.getPosition());
@@ -34,7 +34,7 @@ public class servo extends LinearOpMode {
                 telemetry.addData("Current Right Servo Position", rservo.getPosition());
                 telemetry.update();
             }
-            if (currentGamepad.circle && !previousGamepad.circle) {
+            if (currentGamepad.b && !previousGamepad.b) {
                 lservoPos -= 0.1;
                 telemetry.addData("Left Servo Position", lservoPos);
                 telemetry.addData("Current Left Servo Position", lservo.getPosition());
@@ -42,7 +42,7 @@ public class servo extends LinearOpMode {
                 telemetry.addData("Current Right Servo Position", rservo.getPosition());
                 telemetry.update();
             }
-            if (currentGamepad.triangle && !previousGamepad.triangle) {
+            if (currentGamepad.y && !previousGamepad.y) {
                 lservo.setPosition(lservoPos);
                 rservo.setPosition(rservoPos);
                 telemetry.addData("Left Servo Position", lservoPos);

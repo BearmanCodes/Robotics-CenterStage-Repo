@@ -11,18 +11,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
 public class ShawnDrive extends LinearOpMode {
-    DcMotorEx frontleft;
-    DcMotorEx frontright;
-    DcMotorEx backleft;
-    DcMotorEx backright;
+    DcMotorEx frontleft, frontright, backleft, backright, armMotor;
 
-    Servo leftServo;
+    Servo leftServo, rightServo;
 
-    Servo rightServo;
-
-    private DcMotorEx left, right;
-
-    public double reducerArm = 0.25;
+    public double reducerArm = 0.4;
     public double armPower;
 
     Gamepad currentGamepad = new Gamepad();
@@ -60,8 +53,7 @@ public class ShawnDrive extends LinearOpMode {
 
     public void arm(){
         armPower = (-gamepad2.right_trigger + gamepad2.left_trigger) * reducerArm;
-        left.setPower(armPower);
-        right.setPower(armPower);
+        armMotor.setPower(armPower);
     }
 
     public void allMotorPower(double power){
@@ -98,12 +90,8 @@ public class ShawnDrive extends LinearOpMode {
         //rightServo = hardwareMap.get(Servo.class, "servoRight".toLowerCase());
         //leftServo = hardwareMap.get(Servo.class, "servoLeft".toLowerCase());
 
-        left = hardwareMap.get(DcMotorEx.class, "left");
-        right = hardwareMap.get(DcMotorEx.class, "right");
-        right.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        left.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        right.setDirection(DcMotorEx.Direction.REVERSE);
-
+        armMotor = hardwareMap.get(DcMotorEx.class, "left".toLowerCase());
+        armMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         effect = new Gamepad.RumbleEffect.Builder()
                 .addStep(1.0, 1.0, 2000)
 
