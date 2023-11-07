@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -35,8 +35,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@Autonomous(name="ShawnAuto", group="Left")
-public class ShawnAuto extends LinearOpMode {
+@Autonomous(name="ParkLeftRed", group="Red")
+public class ShawnAutoRed extends LinearOpMode {
 
     private DcMotorEx frontLeft, frontRight, backLeft, backRight;
 
@@ -54,12 +54,7 @@ public class ShawnAuto extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
-        Drive(9999, 100, 100, 100, 100, 12);
-        Drive(1250, -21, 21, -21, 21, 12);
-        Drive(1500, 42, 42, 42, 42, 12);
-        Drive(2250, -70, -70, -70, -70, 3500);
-        Drive(1000, 120, -120, 120, -120, 25000);
-        Drive(1000, -120, 120, -120, 120, 25000);
+        Drive(9999, 66, -66, -66, 66, 12);  
     }
 
     public void Drive(double velocity,
@@ -79,6 +74,9 @@ public class ShawnAuto extends LinearOpMode {
             backRightTarget = backRight.getCurrentPosition() + (int) (backRightInches * TicksPerIn);
 
             allTargetPosition(frontLeftTarget, frontRightTarget, backLeftTarget, backRightTarget);
+            frontLeft.getCurrentPosition();
+
+
 
             allMotorMode(DcMotor.RunMode.RUN_TO_POSITION);
 

@@ -45,6 +45,8 @@ public class ShawnDrive extends LinearOpMode {
     public void arm(){
         armPower = (-gamepad2.right_trigger + gamepad2.left_trigger) * reducerArm;
         armMotor.setPower(armPower);
+        telemetry.addData("Current Position arm: ", armMotor.getCurrentPosition());
+        telemetry.update();
     }
 
     public void servoGo(){
