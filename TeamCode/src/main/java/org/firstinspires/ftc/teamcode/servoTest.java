@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.exception.RobotCoreException;
@@ -20,11 +21,13 @@ public class servoTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         lservo = hardwareMap.get(Servo.class, "lclaw".toLowerCase());
         rservo = hardwareMap.get(Servo.class, "rclaw".toLowerCase());
-        //rservo init open 0.12
-        //lservo init open 0.23
-        //rservo init close 0.25
-        //lservo init close 0.10
-        lservo.setDirection(Servo.Direction.FORWARD);
+        //l servo 0.13 (init)
+        // r servo 0.10 (init)
+        // lservo 0.96 (close)
+        // r servo 1.00 (close)
+        // lservo 0.8 (open)
+        // r servo 0.8 (open)
+        lservo.setDirection(Servo.Direction.REVERSE);
         rservo.setDirection(Servo.Direction.FORWARD);
         waitForStart();
         while (opModeIsActive()){

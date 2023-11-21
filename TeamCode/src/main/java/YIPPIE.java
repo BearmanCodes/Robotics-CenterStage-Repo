@@ -23,7 +23,7 @@ public class YIPPIE extends LinearOpMode {
                 throw new RuntimeException(e);
             }
             if (currentGamepad.y && !previousGamepad.y){
-                SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, R.raw.stop);
+                SoundPlayer.getInstance().startPlaying(hardwareMap.appContext, R.raw.sound);
             }
         }
     }

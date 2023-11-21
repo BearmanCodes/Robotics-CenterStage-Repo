@@ -2,11 +2,13 @@ package org.firstinspires.ftc.teamcode;
 
 import android.annotation.TargetApi;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.exception.RobotCoreException;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
+@Disabled
 
 @TeleOp(name = "RumbleTest")
 public class Rumble extends LinearOpMode {
