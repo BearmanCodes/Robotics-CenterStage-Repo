@@ -1,42 +1,11 @@
-/* Copyright (c) 2017 FIRST. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted (subject to the limitations in the disclaimer below) provided that
- * the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice, this list
- * of conditions and the following disclaimer.
- *
- * Redistributions in binary form must reproduce the above copyright notice, this
- * list of conditions and the following disclaimer in the documentation and/or
- * other materials provided with the distribution.
- *
- * Neither the name of FIRST nor the names of its contributors may be used to endorse or
- * promote products derived from this software without specific prior written permission.
- *
- * NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS
- * LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 package org.firstinspires.ftc.teamcode.Auto;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
-@Autonomous(name="ParkLeftRed", group="Red")
-public class ShawnAutoRed extends LinearOpMode {
+public class DriveAutoCore {
 
     private DcMotorEx frontLeft, frontRight, backLeft, backRight;
 
@@ -44,30 +13,17 @@ public class ShawnAutoRed extends LinearOpMode {
     static final double WheelInches = (75 / 25.4);
     static final double TicksPerIn = TicksPerRev / (WheelInches * Math.PI);
 
-    @Override
-    public void runOpMode() {
-
-        initialize();
-
-        waitForStart();
-
-        //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        sleep(250);
-
-        Drive(9999, 66, -66, -66, 66, 12);  
-    }
-
     public void Drive(double velocity,
                       double frontLeftInches, double frontRightInches,
-                      double backLeftInches, double backRightInches,
-                      long timeout) {
+                      double backLeftInches, double backRightInches, boolean active,
+                      long timeout) throws InterruptedException {
         int frontLeftTarget;
         int frontRightTarget;
         int backLeftTarget;
         int backRightTarget;
 
         // Ensure that the opmode is still active
-        if (opModeIsActive()) {
+        if (active) {
             frontLeftTarget = frontLeft.getCurrentPosition() + (int) (frontLeftInches * TicksPerIn);
             frontRightTarget = frontRight.getCurrentPosition() + (int) (frontRightInches * TicksPerIn);
             backLeftTarget = backLeft.getCurrentPosition() + (int) (backLeftInches * TicksPerIn);
@@ -82,27 +38,22 @@ public class ShawnAutoRed extends LinearOpMode {
 
             allMotorVelocity(Math.abs(velocity));
 
-            while (opModeIsActive() && frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()) {
-                telemetry.addLine("WE ARE MOVING, WOOOOO!");
-                telemetry.update();
+            while (active && frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()) {
             }
 
             allMotorVelocity(0);
 
             allMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(timeout);
+            Thread.sleep(timeout);
         }
     }
 
-
-
-    private void initialize() {
-        frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft".toLowerCase());
-        frontRight = hardwareMap.get(DcMotorEx.class, "frontRight".toLowerCase());
-        backLeft = hardwareMap.get(DcMotorEx.class, "backLeft".toLowerCase());
-        backRight = hardwareMap.get(DcMotorEx.class, "backRight".toLowerCase());
-
+    public void init(HardwareMap hwMap){
+        frontLeft = hwMap.get(DcMotorEx.class, "frontLeft".toLowerCase());
+        frontRight = hwMap.get(DcMotorEx.class, "frontRight".toLowerCase());
+        backLeft = hwMap.get(DcMotorEx.class, "backLeft".toLowerCase());
+        backRight = hwMap.get(DcMotorEx.class, "backRight".toLowerCase());
 
         frontLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -153,5 +104,55 @@ public class ShawnAutoRed extends LinearOpMode {
         backLeft.setTargetPosition(backLeftPos);
         backRight.setTargetPosition(backRightPos);
     }
-}
 
+    public void strafeNW(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, 0, inches, inches, 0, active, tOut);
+    }
+
+    public void fwdDrive(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, inches, inches, inches, inches, active, tOut);
+    }
+
+    public void strafeNE(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, inches, 0, 0, inches, active, tOut);
+    }
+
+    public void strafeLeft(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, -inches, inches, inches, -inches, active, tOut);
+    }
+
+    public void strafeRight(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, inches, -inches, -inches, inches, active, tOut);
+    }
+
+    public void turnCC(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, -inches, inches, -inches, inches, active, tOut);
+    }
+
+    public void turnCW(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, inches, -inches, inches, -inches, active, tOut);
+    }
+
+    public void strafeSW(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, -inches, 0, 0, -inches, active, tOut);
+    }
+
+    public void revDrive(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, -inches, -inches, -inches, -inches, active, tOut);
+    }
+
+    public void strafeSE(double vel, double inches, boolean active, long tOut) throws InterruptedException {
+        inches = Math.abs(inches);
+        Drive(vel, 0, -inches, -inches, 0, active, tOut);
+    }
+
+}

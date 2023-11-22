@@ -27,34 +27,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Auto;
 
-import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
-import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
-@Disabled
+@Autonomous(name="RightRed", group="Red")
+public class RightRed extends LinearOpMode {
 
-@Autonomous(name="STRAIGHT", group="imu")
-public class Straight extends LinearOpMode {
+    private DcMotorEx frontLeft, frontRight, backLeft, backRight, arm;
 
-    private DcMotorEx frontLeft, frontRight, backLeft, backRight;
-
-     IMU imu;
-    IMU.Parameters imuparams;
-
-    YawPitchRollAngles robotOrientation;
-
-    AngularVelocity myRobotAngularVelocity;
+    Servo lClaw, rClaw;
 
 
     static final double TicksPerRev = 560;
@@ -69,58 +56,16 @@ public class Straight extends LinearOpMode {
         waitForStart();
 
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        if (opModeIsActive()){
-            Drive(9999, 25, 25, 25, 25, 400);
-            Drive(9999, 25, 25, 25, 25, 400);
-            /*
-            robotOrientation = imu.getRobotYawPitchRollAngles();
-            myRobotAngularVelocity = imu.getRobotAngularVelocity(AngleUnit.DEGREES);
+        sleep(250);
 
-            float zRotationRate = myRobotAngularVelocity.zRotationRate;
-            float xRotationRate = myRobotAngularVelocity.xRotationRate;
-            float yRotationRate = myRobotAngularVelocity.yRotationRate;
-            double Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
-            if (opModeIsActive()){
-                while (Yaw > -90) {
-                    setMotorVelocity(300, -300, 300, -300);
-                    robotOrientation = imu.getRobotYawPitchRollAngles();
-                    Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
-                    telemetry.addData("Yaw:", "%.2f", Yaw);
-                    telemetry.update();
-                }
-                allMotorVelocity(0);
-                if (Yaw < -90) {
-                    robotOrientation = imu.getRobotYawPitchRollAngles();
-                    Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
-                    double error = Yaw - -90;
-                    while (Math.abs(error) > 0.2){
-                        setMotorVelocity(-300, 300, -300, 300);
-                        robotOrientation = imu.getRobotYawPitchRollAngles();
-                        Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
-                        error = Yaw - 90;
-                        telemetry.addData("Error: ", "%.2f", error);
-                        telemetry.addData("Yaw:", "%.2f", Yaw);
-                        telemetry.update();
-                    }
-                    allMotorVelocity(0);
-                }
-            }
-
-
-            telemetry.addData("Yaw:", "%.2f", Yaw);
-            telemetry.addData("Pitch: ", "%.2f", Pitch);
-            telemetry.addData("Roll: ", "%.2f", Roll);
-            telemetry.addData("zRate: ", "%.2f", zRotationRate);
-            telemetry.addData("xRate: ", "%.2f", xRotationRate);
-            telemetry.addData("yRate: ", "%.2f", yRotationRate);
-            telemetry.update();
-             */
-        }
-        /*
-        Drive(565, 6,6,6,6, 2);
-        Drive(555, -6,-6,-6,-6, 2);
-        Drive(545, -6,6,6,-6, 3);
-         */
+        Drive(750, 23, 23, 23, 23, 12);
+        armMove(500, 1350, 250);
+        rClaw.setPosition(0.20);
+        lClaw.setPosition(0.23);
+        sleep(150);
+        armMove(500, 0, 250);
+        Drive(750, -21, -21, -21, -21, 12);
+        Drive(2000, 42, -42, -42, 42, 0);
     }
 
     public void Drive(double velocity,
@@ -140,6 +85,9 @@ public class Straight extends LinearOpMode {
             backRightTarget = backRight.getCurrentPosition() + (int) (backRightInches * TicksPerIn);
 
             allTargetPosition(frontLeftTarget, frontRightTarget, backLeftTarget, backRightTarget);
+            frontLeft.getCurrentPosition();
+
+
 
             allMotorMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -149,25 +97,8 @@ public class Straight extends LinearOpMode {
                 telemetry.addLine("WE ARE MOVING, WOOOOO!");
                 telemetry.update();
             }
-                allMotorVelocity(0);
 
-                robotOrientation = imu.getRobotYawPitchRollAngles();
-                myRobotAngularVelocity = imu.getRobotAngularVelocity(AngleUnit.DEGREES);
-
-                float zRotationRate = myRobotAngularVelocity.zRotationRate;
-                float xRotationRate = myRobotAngularVelocity.xRotationRate;
-                float yRotationRate = myRobotAngularVelocity.yRotationRate;
-                double Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
-            if (opModeIsActive()){
-                while (Yaw > -90){
-                    setMotorVelocity(300, -300, 300, -300);
-                    robotOrientation = imu.getRobotYawPitchRollAngles();
-                    Yaw   = robotOrientation.getYaw(AngleUnit.DEGREES);
-                    telemetry.addData("Yaw:", "%.2f", Yaw);
-                    telemetry.update();
-                }
-                allMotorVelocity(0);
-            }
+            allMotorVelocity(0);
 
             allMotorMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
@@ -175,21 +106,37 @@ public class Straight extends LinearOpMode {
         }
     }
 
+    public void armMove(double velocity, int ticks, int timeout){
+        arm.setTargetPosition(ticks);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setVelocity(velocity);
+
+        while (opModeIsActive() && arm.isBusy()){
+            telemetry.addData("Position: ", arm.getCurrentPosition());
+            telemetry.addData("Target: ", ticks);
+            telemetry.update();
+        }
+        arm.setVelocity(0);
+
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        sleep(timeout);
+    }
+
+    public void outputArm(){
+        telemetry.addData("current arm position", arm.getCurrentPosition());
+        telemetry.update();
+    }
+
 
 
     private void initialize() {
-        frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft");
-        frontRight = hardwareMap.get(DcMotorEx.class, "frontRight");
-        backLeft = hardwareMap.get(DcMotorEx.class, "backLeft");
-        backRight = hardwareMap.get(DcMotorEx.class, "backRight");
+        frontLeft = hardwareMap.get(DcMotorEx.class, "frontLeft".toLowerCase());
+        frontRight = hardwareMap.get(DcMotorEx.class, "frontRight".toLowerCase());
+        backLeft = hardwareMap.get(DcMotorEx.class, "backLeft".toLowerCase());
+        backRight = hardwareMap.get(DcMotorEx.class, "backRight".toLowerCase());
+        arm = hardwareMap.get(DcMotorEx.class, "left".toLowerCase());
 
-        imu = hardwareMap.get(IMU.class, "botIMU");
-        imuparams = new IMU.Parameters(new RevHubOrientationOnRobot
-                (RevHubOrientationOnRobot.LogoFacingDirection.UP,
-                        RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD));
-
-        imu.initialize(imuparams);
-        imu.resetYaw();
 
         frontLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -200,6 +147,21 @@ public class Straight extends LinearOpMode {
         frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        arm.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        rClaw = hardwareMap.get(Servo.class, "rclaw".toLowerCase());
+        lClaw = hardwareMap.get(Servo.class, "lclaw".toLowerCase());
+        rClaw.setDirection(Servo.Direction.FORWARD);
+
+        lClaw.setDirection(Servo.Direction.REVERSE);
+
+        rClaw.setPosition(0.10);
+        lClaw.setPosition(0.13);
+
 
         allMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
@@ -216,13 +178,6 @@ public class Straight extends LinearOpMode {
         frontRight.setVelocity(velocity);
         backLeft.setVelocity(velocity);
         backRight.setVelocity(velocity);
-    }
-
-    public void setMotorVelocity(double fLvelocity, double fRvelocity, double bLvelocity, double bRvelocity) {
-        frontLeft.setVelocity(fLvelocity);
-        frontRight.setVelocity(fRvelocity);
-        backLeft.setVelocity(bLvelocity);
-        backRight.setVelocity(bRvelocity);
     }
 
     public void allMotorPower(double power){
