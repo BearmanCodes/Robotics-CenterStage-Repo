@@ -23,9 +23,10 @@ public class ServoCore {
         lClaw.setDirection(Servo.Direction.REVERSE);
 
         rClaw.setPosition(0.10);
-        lClaw.setPosition(0.13);
+        lClaw.setPosition(0.13); //Starting position that grasps a pixel in the back
     }
 
+    //Dpad control used in Mason S.'s op mode
     public void dpadRun(){
 
         if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up){
@@ -37,6 +38,8 @@ public class ServoCore {
             rClaw.setPosition(0.8); //(open)
         }
     }
+
+    //Toggle controls used in Joel and Mason M.'s op modes
 
     public void toggleRun(){
         if(currentGamepad2.a && !previousGamepad2.a){

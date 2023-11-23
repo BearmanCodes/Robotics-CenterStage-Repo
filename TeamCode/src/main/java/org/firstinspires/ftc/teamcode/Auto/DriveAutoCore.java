@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class DriveAutoCore {
 
-    private DcMotorEx frontLeft, frontRight, backLeft, backRight;
+    public DcMotorEx frontLeft, frontRight, backLeft, backRight;
 
     static final double TicksPerRev = 560;
     static final double WheelInches = (75 / 25.4);

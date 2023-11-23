@@ -11,10 +11,10 @@ public class DrivetrainCore{
 
     public DcMotorEx frontleft, frontright, backleft, backright;
 
-    public double reducer = 0.8;
+    public double reducer = 0.8; //Change for reducing drive power
 
     public void init(HardwareMap hwMap){
-        frontleft = hwMap.get(DcMotorEx.class, "frontleft");
+        frontleft = hwMap.get(DcMotorEx.class, "frontleft");  //change these motor names depending on the config
         frontright = hwMap.get(DcMotorEx.class, "frontright");
         backleft = hwMap.get(DcMotorEx.class, "backleft");
         backright = hwMap.get(DcMotorEx.class, "backright");
@@ -30,7 +30,7 @@ public class DrivetrainCore{
         double denominator = Math.max(Math.abs(Vertical) + Math.abs(Horizontal) + Math.abs(Pivot), 1);
 
         double frontLeftPower = (-Pivot + (Vertical - Horizontal)) * reducer;
-        double frontRightPower = (Pivot + Vertical + Horizontal) * reducer;
+        double frontRightPower = (Pivot + Vertical + Horizontal) * reducer; //Mecanum drivetrain shenanigans
         double backRightPower = (Pivot + (Vertical - Horizontal)) * reducer;
         double backLeftPower = (-Pivot + Vertical + Horizontal) * reducer;
 
@@ -38,7 +38,6 @@ public class DrivetrainCore{
         frontright.setPower(frontRightPower);
         backleft.setPower(backLeftPower);
         backright.setPower(backRightPower);
-
     }
 
     public void allMotorPower(double power){
@@ -55,7 +54,7 @@ public class DrivetrainCore{
         backright.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         frontright.setDirection(DcMotorSimple.Direction.FORWARD);
-        frontleft.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontleft.setDirection(DcMotorSimple.Direction.REVERSE); //Change these directions for your drive
         backright.setDirection(DcMotorSimple.Direction.FORWARD);
         backleft.setDirection(DcMotorSimple.Direction.FORWARD);
 
