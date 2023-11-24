@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.Red;
+package org.firstinspires.ftc.teamcode.Auto.Blue.Left;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -36,8 +36,8 @@ import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 
-@Autonomous(name="RightRedRight", group="League")
-public class RightRedRight extends LinearOpMode {
+@Autonomous(name="LeftBlueMiddle", group="LeftBlue")
+public class LeftBlueMiddle extends LinearOpMode {
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
     ArmAutoCore armAutoCore = new ArmAutoCore();
@@ -54,15 +54,14 @@ public class RightRedRight extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
-        driveAutoCore.strafeRight(750, 18, opModeIsActive(), 15);
-        driveAutoCore.fwdDrive(750, 12, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12);
         armAutoCore.move(500, 1350, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
         armAutoCore.move(500, 0, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 9, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.strafeRight(2000, 24, opModeIsActive(), 12); //This is 42 - whatever we strafed right
+        driveAutoCore.revDrive(750, 21, opModeIsActive(), 12);
+        driveAutoCore.strafeLeft(2000, 42, opModeIsActive(), 12);
     }
 
     private void initialize() {

@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.Blue;
+package org.firstinspires.ftc.teamcode.Auto.Red.Left;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -36,8 +36,8 @@ import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 
-@Autonomous(name="RightBlueMiddle", group="Blue")
-public class RightBlueMiddle extends LinearOpMode {
+@Autonomous(name="LeftRedRight", group="LeftRed")
+public class LeftRedRight extends LinearOpMode {
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
     ArmAutoCore armAutoCore = new ArmAutoCore();
@@ -54,14 +54,17 @@ public class RightBlueMiddle extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
-        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12);
-        armAutoCore.move(500, 1350, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
-        servoAutoCore.lClaw.setPosition(0.23);
-        sleep(150);
-        armAutoCore.move(500, 0, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 21, opModeIsActive(), 12);
-        driveAutoCore.strafeLeft(2000, 90, opModeIsActive(), 12);
+        driveAutoCore.strafeLeft(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
+        driveAutoCore.fwdDrive(750, 21, opModeIsActive(), 12); //Change this to how far we need to be to line up with right tape once turned
+        driveAutoCore.turnAmount(-90, opModeIsActive()); //Keep this
+        driveAutoCore.fwdDrive(750, 38, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach right tape
+        armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
+        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
+        servoAutoCore.lClaw.setPosition(0.23);  //Keep this
+        sleep(150); //Keep this
+        armAutoCore.move(500, 0, opModeIsActive(), 250); //Keep this
+        driveAutoCore.strafeRight(750, 19, opModeIsActive(), 12); // Make this whatever we drove forward -2
+        driveAutoCore.fwdDrive(2000, 67, opModeIsActive(), 12); //This is 90 - whatever we strafed right (deviated from original)
     }
 
     private void initialize() {
