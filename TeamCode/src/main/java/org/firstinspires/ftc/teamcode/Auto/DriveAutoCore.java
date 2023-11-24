@@ -1,13 +1,23 @@
 package org.firstinspires.ftc.teamcode.Auto;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 public class DriveAutoCore {
 
     public DcMotorEx frontLeft, frontRight, backLeft, backRight;
+
+    YawPitchRollAngles robotOrientation;
+
+    IMU imu;
+    IMU.Parameters imuparams;
 
     static final double TicksPerRev = 560;
     static final double WheelInches = (75 / 25.4);
@@ -55,6 +65,14 @@ public class DriveAutoCore {
         backLeft = hwMap.get(DcMotorEx.class, "backLeft".toLowerCase());
         backRight = hwMap.get(DcMotorEx.class, "backRight".toLowerCase());
 
+        imu = hwMap.get(IMU.class, "imu");
+        imuparams = new IMU.Parameters(new RevHubOrientationOnRobot
+                (RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                        RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD));
+
+        imu.initialize(imuparams);
+        imu.resetYaw();
+
         frontLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -95,6 +113,13 @@ public class DriveAutoCore {
         frontRight.setPower(frontRightPower);
         backLeft.setPower(backLeftPower);
         backRight.setPower(backRightPower);
+    }
+
+    public void setMotorVelocity(double fLvelocity, double fRvelocity, double bLvelocity, double bRvelocity) {
+        frontLeft.setVelocity(fLvelocity);
+        frontRight.setVelocity(fRvelocity);
+        backLeft.setVelocity(bLvelocity);
+        backRight.setVelocity(bRvelocity);
     }
 
     public void allTargetPosition(int frontLeftPos, int frontRightPos,
@@ -138,6 +163,55 @@ public class DriveAutoCore {
     public void turnCW(double vel, double inches, boolean active, long tOut) throws InterruptedException {
         inches = Math.abs(inches);
         Drive(vel, inches, -inches, inches, -inches, active, tOut);
+    }
+
+    public void turnAmount(int target, boolean active) {
+        if (active) {
+            robotOrientation = imu.getRobotYawPitchRollAngles();
+            double Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+            if (active) {
+                if (target < 0) {
+                    while (Yaw > target) {
+                        setMotorVelocity(300, -300, 300, -300);
+                        robotOrientation = imu.getRobotYawPitchRollAngles();
+                        Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                    }
+                    allMotorVelocity(0);
+                    if (Yaw < target) {
+                        robotOrientation = imu.getRobotYawPitchRollAngles();
+                        Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                        double error = Yaw - target;
+                        while (Math.abs(error) > 0.2) {
+                            setMotorVelocity(-300, 300, -300, 300);
+                            robotOrientation = imu.getRobotYawPitchRollAngles();
+                            Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                            error = Yaw - target;
+                        }
+                        allMotorVelocity(0);
+                    }
+                }
+                if (target > 0){
+                    while (Yaw < target) {
+                        setMotorVelocity(-300, 300, -300, 300);
+                        robotOrientation = imu.getRobotYawPitchRollAngles();
+                        Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                    }
+                    allMotorVelocity(0);
+                    if (Yaw > target) {
+                        robotOrientation = imu.getRobotYawPitchRollAngles();
+                        Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                        double error = Yaw - target;
+                        while (Math.abs(error) > 0.2) {
+                            setMotorVelocity(300, -300, 300, -300);
+                            robotOrientation = imu.getRobotYawPitchRollAngles();
+                            Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                            error = Yaw - target;
+                        }
+                        allMotorVelocity(0);
+                    }
+                }
+            }
+        }
     }
 
     public void strafeSW(double vel, double inches, boolean active, long tOut) throws InterruptedException {

@@ -27,19 +27,19 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto;
+package org.firstinspires.ftc.teamcode.Auto.Red;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name="LeftBlueCore", group="Blue")
-public class LeftBlueCore extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
+import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
+import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 
-    DriveAutoCore  driveAutoCore = new DriveAutoCore();
+@Autonomous(name="LeftRedMiddle", group="Red")
+public class LeftRedMiddle extends LinearOpMode {
+
+    DriveAutoCore driveAutoCore = new DriveAutoCore();
     ArmAutoCore armAutoCore = new ArmAutoCore();
     ServoAutoCore servoAutoCore = new ServoAutoCore();
 
@@ -61,7 +61,7 @@ public class LeftBlueCore extends LinearOpMode {
         sleep(150);
         armAutoCore.move(500, 0, opModeIsActive(), 250);
         driveAutoCore.revDrive(750, 21, opModeIsActive(), 12);
-        driveAutoCore.strafeLeft(2000, 42, opModeIsActive(), 12);
+        driveAutoCore.strafeRight(2000, 90, opModeIsActive(), 12);
     }
 
     private void initialize() {

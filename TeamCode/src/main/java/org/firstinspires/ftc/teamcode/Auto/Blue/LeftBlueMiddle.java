@@ -27,21 +27,21 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto;
+package org.firstinspires.ftc.teamcode.Auto.Blue;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name="RightBlueCore", group="Blue")
-public class RightBlueCore extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
+import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
+import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 
-    private DcMotorEx arm;
+@Autonomous(name="LeftBlueMiddle", group="Blue")
+public class LeftBlueMiddle extends LinearOpMode {
 
-    DriveAutoCore  driveAutoCore = new DriveAutoCore();
-    Servo lClaw, rClaw;
+    DriveAutoCore driveAutoCore = new DriveAutoCore();
+    ArmAutoCore armAutoCore = new ArmAutoCore();
+    ServoAutoCore servoAutoCore = new ServoAutoCore();
 
 
     @Override
@@ -55,48 +55,19 @@ public class RightBlueCore extends LinearOpMode {
         sleep(250);
 
         driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12);
-        armMove(500, 1350, 250);
-        rClaw.setPosition(0.20);  //open slightly
-        lClaw.setPosition(0.23);
+        armAutoCore.move(500, 1350, opModeIsActive(), 250);
+        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
+        servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
-        armMove(500, 0, 250);
+        armAutoCore.move(500, 0, opModeIsActive(), 250);
         driveAutoCore.revDrive(750, 21, opModeIsActive(), 12);
         driveAutoCore.strafeLeft(2000, 42, opModeIsActive(), 12);
     }
 
-
-    public void armMove(double velocity, int ticks, int timeout){
-        arm.setTargetPosition(ticks);
-        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        arm.setVelocity(velocity);
-
-        while (opModeIsActive() && arm.isBusy()){
-            telemetry.addData("Position: ", arm.getCurrentPosition());
-            telemetry.addData("Target: ", ticks);
-            telemetry.update();
-        }
-        arm.setVelocity(0);
-
-        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        sleep(timeout);
-    }
-
-
     private void initialize() {
         driveAutoCore.init(hardwareMap);
-        arm = hardwareMap.get(DcMotorEx.class, "left".toLowerCase());
-
-        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        rClaw = hardwareMap.get(Servo.class, "rclaw".toLowerCase());
-        lClaw = hardwareMap.get(Servo.class, "lclaw".toLowerCase());
-        rClaw.setDirection(Servo.Direction.FORWARD);
-
-        lClaw.setDirection(Servo.Direction.REVERSE);
-
-        rClaw.setPosition(0.10);
+        armAutoCore.init(hardwareMap);
+        servoAutoCore.init(hardwareMap);
     }
 }
 
