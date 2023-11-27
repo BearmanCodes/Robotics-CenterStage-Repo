@@ -11,7 +11,7 @@ public class DrivetrainCore{
 
     public DcMotorEx frontleft, frontright, backleft, backright;
 
-    public double reducer = 0.8; //Change for reducing drive power
+    public double reducer = 1; //Change for reducing drive power
 
     public void init(HardwareMap hwMap){
         frontleft = hwMap.get(DcMotorEx.class, "frontleft");  //change these motor names depending on the config

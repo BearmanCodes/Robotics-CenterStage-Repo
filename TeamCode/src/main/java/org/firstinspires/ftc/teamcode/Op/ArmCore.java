@@ -32,7 +32,7 @@ public class ArmCore {
 
     //This uses the left stick to move the arm as used in Joel's op mode
     public void lStick(Gamepad gamepad2){
-        armPower = ((gamepad2.left_stick_y) * reducerArm) - 0.0025;
+        armPower = ((gamepad2.left_stick_y) * (reducerArm + 0.1)) - 0.0025;
         armMotor.setPower(armPower);
     }
 }
