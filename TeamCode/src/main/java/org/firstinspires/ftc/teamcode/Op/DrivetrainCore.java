@@ -1,10 +1,15 @@
 package org.firstinspires.ftc.teamcode.Op;
 
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.IMU;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 
 public class DrivetrainCore{
@@ -13,11 +18,24 @@ public class DrivetrainCore{
 
     public double reducer = 1; //Change for reducing drive power
 
+    YawPitchRollAngles robotOrientation;
+
+    IMU imu;
+    IMU.Parameters imuparams;
+
     public void init(HardwareMap hwMap){
         frontleft = hwMap.get(DcMotorEx.class, "frontleft");  //change these motor names depending on the config
         frontright = hwMap.get(DcMotorEx.class, "frontright");
         backleft = hwMap.get(DcMotorEx.class, "backleft");
         backright = hwMap.get(DcMotorEx.class, "backright");
+
+        imu = hwMap.get(IMU.class, "imu");
+        imuparams = new IMU.Parameters(new RevHubOrientationOnRobot
+                (RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                        RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD));
+
+        imu.initialize(imuparams);
+        imu.resetYaw();
 
         motorSetUp();
 
@@ -67,5 +85,69 @@ public class DrivetrainCore{
         frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void setMotorVelocity(double fLvelocity, double fRvelocity, double bLvelocity, double bRvelocity) {
+        frontleft.setVelocity(fLvelocity);
+        frontright.setVelocity(fRvelocity);
+        backleft.setVelocity(bLvelocity);
+        backright.setVelocity(bRvelocity);
+    }
+
+    public void allMotorVelocity(double velocity) {
+        frontleft.setVelocity(velocity);
+        frontright.setVelocity(velocity);
+        backleft.setVelocity(velocity);
+        backright.setVelocity(velocity);
+    }
+
+    public void Flip(boolean active) {
+        if (active) {
+            robotOrientation = imu.getRobotYawPitchRollAngles();
+            double Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+            double target = Yaw + 180;
+            if (active) {
+                if (target < 0) {
+                    while (Yaw > target) {
+                        setMotorVelocity(3000, -3000, 3000, -3000);
+                        robotOrientation = imu.getRobotYawPitchRollAngles();
+                        Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                    }
+                    allMotorVelocity(0);
+                    if (Yaw < target) {
+                        robotOrientation = imu.getRobotYawPitchRollAngles();
+                        Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                        double error = Yaw - target;
+                        while (Math.abs(error) > 0.2) {
+                            setMotorVelocity(-3000, 3000, -3000, 3000);
+                            robotOrientation = imu.getRobotYawPitchRollAngles();
+                            Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                            error = Yaw - target;
+                        }
+                        allMotorVelocity(0);
+                    }
+                }
+                if (target > 0) {
+                    while (Yaw < target) {
+                        setMotorVelocity(-3000, 3000, -3000, 3000);
+                        robotOrientation = imu.getRobotYawPitchRollAngles();
+                        Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                    }
+                    allMotorVelocity(0);
+                    if (Yaw > target) {
+                        robotOrientation = imu.getRobotYawPitchRollAngles();
+                        Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                        double error = Yaw - target;
+                        while (Math.abs(error) > 0.2) {
+                            setMotorVelocity(300, -300, 300, -300);
+                            robotOrientation = imu.getRobotYawPitchRollAngles();
+                            Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                            error = Yaw - target;
+                        }
+                        allMotorVelocity(0);
+                    }
+                }
+            }
+        }
     }
 }

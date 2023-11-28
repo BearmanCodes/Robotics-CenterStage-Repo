@@ -12,7 +12,6 @@ public class ServoCore {
     Gamepad currentGamepad2 = new Gamepad();
     Gamepad previousGamepad2 = new Gamepad();
 
-
     public Servo lClaw, rClaw;
     boolean clawstat;
 

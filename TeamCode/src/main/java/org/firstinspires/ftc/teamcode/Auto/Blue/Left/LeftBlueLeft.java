@@ -54,15 +54,15 @@ public class LeftBlueLeft extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
-        driveAutoCore.strafeLeft(750, 18, opModeIsActive(), 15); //Wherever to line up with left tape
-        driveAutoCore.fwdDrive(750, 12, opModeIsActive(), 12); //However much to line up arm
+        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 15); //Wherever to line up with left tape
+        driveAutoCore.fwdDrive(750, 18, opModeIsActive(), 12); //However much to line up arm
         armAutoCore.move(500, 1350, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
-        armAutoCore.move(500, 0, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 9, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.strafeLeft(2000, 24, opModeIsActive(), 12); //This is 42 - whatever we strafed left
+        armAutoCore.move(500, 150, opModeIsActive(), 250);
+        driveAutoCore.revDrive(750, 15, opModeIsActive(), 12); // Make this whatever we drove forward -2
+        driveAutoCore.strafeLeft(2000, 36, opModeIsActive(), 12); //This is 42 - whatever we strafed left
     }
 
     private void initialize() {

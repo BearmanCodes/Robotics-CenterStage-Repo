@@ -15,7 +15,6 @@ public class DriveAutoCore {
     public DcMotorEx frontLeft, frontRight, backLeft, backRight;
 
     YawPitchRollAngles robotOrientation;
-
     IMU imu;
     IMU.Parameters imuparams;
 
