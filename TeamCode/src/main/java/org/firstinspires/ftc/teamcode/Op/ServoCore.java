@@ -20,7 +20,7 @@ public class ServoCore {
         rClaw = hwMap.get(Servo.class, "rclaw".toLowerCase());
         lClaw = hwMap.get(Servo.class, "lclaw".toLowerCase());
 
-        lClaw.setDirection(Servo.Direction.REVERSE);
+        rClaw.setDirection(Servo.Direction.REVERSE);
 
         rClaw.setPosition(0.10);
         lClaw.setPosition(0.13); //Starting position that grasps a pixel in the back
