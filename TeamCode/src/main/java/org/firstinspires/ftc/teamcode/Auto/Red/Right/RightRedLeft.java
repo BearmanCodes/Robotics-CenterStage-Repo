@@ -65,6 +65,8 @@ public class RightRedLeft extends LinearOpMode {
         armAutoCore.move(500, 150, opModeIsActive(), 250); //Keep this
         driveAutoCore.strafeLeft(750, 23, opModeIsActive(), 12); // Make this whatever we drove forward -2
         driveAutoCore.revDrive(2000, 45, opModeIsActive(), 12); //This is 42 - whatever we strafed right (deviated from original)
+        servoAutoCore.lClaw.setPosition(0.8); //(open)
+        servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
     private void initialize() {

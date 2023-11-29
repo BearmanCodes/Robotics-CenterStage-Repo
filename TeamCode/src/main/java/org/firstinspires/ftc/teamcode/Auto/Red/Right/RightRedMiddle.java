@@ -59,9 +59,11 @@ public class RightRedMiddle extends LinearOpMode {
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
-        armAutoCore.move(500, 0, opModeIsActive(), 250);
+        armAutoCore.move(500, 150, opModeIsActive(), 250);
         driveAutoCore.revDrive(750, 21, opModeIsActive(), 12);
         driveAutoCore.strafeRight(2000, 42, opModeIsActive(), 12);
+        servoAutoCore.lClaw.setPosition(0.8); //(open)
+        servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
     private void initialize() {

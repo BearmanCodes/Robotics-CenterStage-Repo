@@ -23,6 +23,9 @@ public class MasonDrive extends LinearOpMode {
             } catch (RobotCoreException e) {
                 throw new RuntimeException(e);
             }
+            if (servoCore.currentGamepad.y && !servoCore.previousGamepad.y){
+                dTrain.Flip(opModeIsActive());
+            }
             dTrain.run(gamepad1);
             armCore.rStick(gamepad2);
             servoCore.dpadRun();

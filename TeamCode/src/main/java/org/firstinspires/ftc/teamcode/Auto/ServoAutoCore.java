@@ -10,8 +10,8 @@ public class ServoAutoCore {
     public void init(HardwareMap hwMap){
         rClaw = hwMap.get(Servo.class, "rclaw".toLowerCase());
         lClaw = hwMap.get(Servo.class, "lclaw".toLowerCase());
-        rClaw.setDirection(Servo.Direction.REVERSE);
 
+        rClaw.setDirection(Servo.Direction.REVERSE);
         lClaw.setDirection(Servo.Direction.FORWARD);
 
         rClaw.setPosition(0.10);

@@ -105,7 +105,7 @@ public class DrivetrainCore{
         if (active) {
             robotOrientation = imu.getRobotYawPitchRollAngles();
             double Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
-            double target = Yaw + 180;
+            double target = Yaw - 180;
             if (active) {
                 if (target < 0) {
                     while (Yaw > target) {
