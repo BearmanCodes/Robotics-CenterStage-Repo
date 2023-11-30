@@ -35,13 +35,22 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
+import org.firstinspires.ftc.teamcode.Auto.TensorCore;
 
 @Autonomous(name="LeftRedLeft", group="LeftRed")
 public class LeftRedLeft extends LinearOpMode {
+    private static final String TFOD_MODEL_ASSET = "Red.tflite";
+
+    private static final String[] LABELS = {
+            "Red",
+    };
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
     ArmAutoCore armAutoCore = new ArmAutoCore();
     ServoAutoCore servoAutoCore = new ServoAutoCore();
+    TensorCore tensorCore = new TensorCore();
+
+    double x;
 
 
     @Override
@@ -53,9 +62,14 @@ public class LeftRedLeft extends LinearOpMode {
 
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
-
+        x = tensorCore.telemetryTfod(telemetry);
+        while (x == 0){
+            x = tensorCore.telemetryTfod(telemetry);
+        }
+        tensorCore.visionPortal.close();
+        x = tensorCore.telemetryTfod(telemetry);
         driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 15); //change this to line up with left tape
-        driveAutoCore.fwdDrive(750, 18, opModeIsActive(), 12); //change this to where arm reaches
+        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //change this to where arm reaches
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //keep this
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly //keep this
         servoAutoCore.lClaw.setPosition(0.23);  //keep this
@@ -69,6 +83,7 @@ public class LeftRedLeft extends LinearOpMode {
         driveAutoCore.init(hardwareMap);
         armAutoCore.init(hardwareMap);
         servoAutoCore.init(hardwareMap);
+        tensorCore.initTfod(hardwareMap, LABELS, TFOD_MODEL_ASSET);
     }
 }
 

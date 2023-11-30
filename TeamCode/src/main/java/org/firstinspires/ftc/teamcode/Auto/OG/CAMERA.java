@@ -48,7 +48,7 @@ import java.util.List;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
-@Disabled
+
 @TeleOp(name = "WOAH", group = "Concept")
 public class CAMERA extends LinearOpMode {
 
@@ -56,14 +56,12 @@ public class CAMERA extends LinearOpMode {
 
     // TFOD_MODEL_ASSET points to a model file stored in the project Asset location,
     // this is only used for Android Studio when using models in Assets.
-    private static final String TFOD_MODEL_ASSET = "prop.tflite";
+    private static final String TFOD_MODEL_ASSET = "Blue.tflite";
     // TFOD_MODEL_FILE points to a model file stored onboard the Robot Controller's storage,
     // this is used when uploading models directly to the RC using the model upload interface.
     // Define the labels recognized in the model for TFOD (must be in training order!)
     private static final String[] LABELS = {
-            "right",
-            "middle",
-            "left"
+            "Blue",
     };
 
     /**
@@ -133,8 +131,8 @@ public class CAMERA extends LinearOpMode {
             // set parameters for custom models.
             .setModelLabels(LABELS)
             //.setIsModelTensorFlow2(true)
-            .setIsModelQuantized(true)
-            .setModelInputSize(224)
+            //.setIsModelQuantized(true)
+            //.setModelInputSize(224)
             //.setModelAspectRatio(16.0 / 9.0)
 
             .build();

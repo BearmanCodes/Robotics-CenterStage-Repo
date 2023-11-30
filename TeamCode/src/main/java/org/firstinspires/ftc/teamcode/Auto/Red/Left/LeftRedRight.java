@@ -55,7 +55,7 @@ public class LeftRedRight extends LinearOpMode {
         sleep(250);
 
         driveAutoCore.strafeLeft(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
-        driveAutoCore.fwdDrive(750, 25, opModeIsActive(), 12); //Change this to how far we need to be to line up with right tape once turned
+        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12); //Change this to how far we need to be to line up with right tape once turned
         driveAutoCore.turnAmount(-90, opModeIsActive()); //Keep this
         driveAutoCore.fwdDrive(750, 17, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach right tape
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this

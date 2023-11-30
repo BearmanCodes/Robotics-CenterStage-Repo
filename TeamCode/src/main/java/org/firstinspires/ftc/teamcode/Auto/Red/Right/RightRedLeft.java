@@ -55,7 +55,7 @@ public class RightRedLeft extends LinearOpMode {
         sleep(250);
 
         driveAutoCore.strafeRight(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
-        driveAutoCore.fwdDrive(750, 25, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
+        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
         driveAutoCore.turnAmount(90, opModeIsActive()); //Keep this
         driveAutoCore.fwdDrive(750, 17, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
@@ -64,7 +64,7 @@ public class RightRedLeft extends LinearOpMode {
         sleep(150); //Keep this
         armAutoCore.move(500, 150, opModeIsActive(), 250); //Keep this
         driveAutoCore.strafeLeft(750, 23, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.revDrive(2000, 45, opModeIsActive(), 12); //This is 42 - whatever we strafed right (deviated from original)
+        driveAutoCore.revDrive(2000, 43, opModeIsActive(), 12); //This is 42 - whatever we strafed right (deviated from original)
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }

@@ -12,17 +12,20 @@ public class ServoCore {
     Gamepad currentGamepad2 = new Gamepad();
     Gamepad previousGamepad2 = new Gamepad();
 
-    public Servo lClaw, rClaw;
+    public Servo lClaw, rClaw, airplane;
     boolean clawstat;
 
     public void init(HardwareMap hwMap){
         rClaw = hwMap.get(Servo.class, "rclaw".toLowerCase());
         lClaw = hwMap.get(Servo.class, "lclaw".toLowerCase());
+        airplane = hwMap.get(Servo.class, "air".toLowerCase());
 
+        airplane.setDirection(Servo.Direction.FORWARD);
         rClaw.setDirection(Servo.Direction.REVERSE);
 
         rClaw.setPosition(0.10);
         lClaw.setPosition(0.13); //Starting position that grasps a pixel in the back
+        airplane.setPosition(0.20);
     }
 
     //Dpad control used in Mason S.'s op mode
@@ -35,6 +38,12 @@ public class ServoCore {
         if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down){
             lClaw.setPosition(0.8); //(open)
             rClaw.setPosition(0.8); //(open)
+        }
+    }
+
+    public void airLaunch(){
+        if (currentGamepad.x && !previousGamepad.x){
+            airplane.setPosition(0);
         }
     }
 

@@ -55,7 +55,7 @@ public class RightBlueRight extends LinearOpMode {
         sleep(250);
 
         driveAutoCore.strafeRight(750, 6, opModeIsActive(), 15); //change this to line up with right tape
-        driveAutoCore.fwdDrive(750, 18, opModeIsActive(), 12); //change this to where arm reaches
+        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //change this to where arm reaches
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //keep this
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly //keep this
         servoAutoCore.lClaw.setPosition(0.23);  //keep this

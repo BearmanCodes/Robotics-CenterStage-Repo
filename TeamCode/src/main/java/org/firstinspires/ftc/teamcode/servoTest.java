@@ -21,13 +21,15 @@ public class servoTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         lservo = hardwareMap.get(Servo.class, "lclaw".toLowerCase());
         rservo = hardwareMap.get(Servo.class, "rclaw".toLowerCase());
+        //airplane default 0.20
+        //airplane launch 0.45
         //l servo 0.13 (init)
         // r servo 0.10 (init)
         // lservo 0.96 (close)
         // r servo 1.00 (close)
         // lservo 0.8 (open)
         // r servo 0.8 (open)
-        lservo.setDirection(Servo.Direction.REVERSE);
+        lservo.setDirection(Servo.Direction.FORWARD);
         rservo.setDirection(Servo.Direction.FORWARD);
         waitForStart();
         while (opModeIsActive()){
