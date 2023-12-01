@@ -1,12 +1,13 @@
 package org.firstinspires.ftc.teamcode.Op;
 
 import com.qualcomm.ftccommon.SoundPlayer;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.exception.RobotCoreException;
 
 import org.firstinspires.ftc.teamcode.R;
-
+@Disabled
 @TeleOp
 public class JoelDrive extends LinearOpMode {
     DrivetrainCore dTrain = new DrivetrainCore();

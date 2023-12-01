@@ -27,22 +27,35 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.Red.Right;
+package org.firstinspires.ftc.teamcode.Auto.Red;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
-@Disabled
-@Autonomous(name="RightRedLeft", group="RightRed")
-public class RightRedLeft extends LinearOpMode {
+import org.firstinspires.ftc.teamcode.Auto.TensorCore;
+
+
+@Autonomous(name="RightRed", group="Red")
+public class RightRedCore extends LinearOpMode {
+    private static final String TFOD_MODEL_ASSET = "Red.tflite";
+    private static final String[] LABELS = {
+            "Red",
+    };
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
     ArmAutoCore armAutoCore = new ArmAutoCore();
     ServoAutoCore servoAutoCore = new ServoAutoCore();
+    TensorCore tensorCore = new TensorCore();
+
+    ElapsedTime time = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+
+    double x;
+
+    String pos;
 
 
     @Override
@@ -55,6 +68,38 @@ public class RightRedLeft extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
+        decide(pos);
+    }
+
+    private void initialize() {
+        driveAutoCore.init(hardwareMap);
+        armAutoCore.init(hardwareMap);
+        servoAutoCore.init(hardwareMap);
+        tensorCore.initTfod(hardwareMap, LABELS, TFOD_MODEL_ASSET);
+        x = tensorCore.telemetryTfod(telemetry);
+        time.reset();
+        while (x == 0 || time.time() >= 6.5){
+            x = tensorCore.telemetryTfod(telemetry);
+        }
+        x = tensorCore.telemetryTfod(telemetry);
+        pos = tensorCore.getPos("red", x);
+        tensorCore.visionPortal.close();
+    }
+
+    public void decide(String position) throws InterruptedException {
+        switch (position){
+            case "left":
+                LeftGo();
+                break;
+            case "right":
+                RightGo();
+                break;
+            case "middle":
+                MiddleGo();
+        }
+    }
+
+    public void LeftGo() throws InterruptedException {
         driveAutoCore.strafeRight(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
         driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
         driveAutoCore.turnAmount(90, opModeIsActive()); //Keep this
@@ -70,10 +115,30 @@ public class RightRedLeft extends LinearOpMode {
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
-    private void initialize() {
-        driveAutoCore.init(hardwareMap);
-        armAutoCore.init(hardwareMap);
-        servoAutoCore.init(hardwareMap);
+    public void RightGo() throws InterruptedException{
+        driveAutoCore.strafeRight(750, 6, opModeIsActive(), 15);
+        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12);
+        armAutoCore.move(500, 1350, opModeIsActive(), 250);
+        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
+        servoAutoCore.lClaw.setPosition(0.23);
+        sleep(150);
+        armAutoCore.move(500, 150, opModeIsActive(), 250);
+        driveAutoCore.revDrive(750, 13, opModeIsActive(), 12); // Make this whatever we drove forward -2
+        driveAutoCore.strafeRight(2000, 36, opModeIsActive(), 12); //This is 42 - whatever we strafed right
+        servoAutoCore.lClaw.setPosition(0.8); //(open)
+        servoAutoCore.rClaw.setPosition(0.8); //(open)
+    }
+
+    public void MiddleGo() throws InterruptedException{
+        driveAutoCore.fwdDrive(750, 21, opModeIsActive(), 12);
+        armAutoCore.move(500, 1350, opModeIsActive(), 250);
+        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
+        servoAutoCore.lClaw.setPosition(0.23);
+        sleep(150);
+        armAutoCore.move(500, 150, opModeIsActive(), 250);
+        driveAutoCore.revDrive(750, 19, opModeIsActive(), 12);
+        driveAutoCore.strafeRight(2000, 42, opModeIsActive(), 12);
+        servoAutoCore.lClaw.setPosition(0.8); //(open)
+        servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 }
-

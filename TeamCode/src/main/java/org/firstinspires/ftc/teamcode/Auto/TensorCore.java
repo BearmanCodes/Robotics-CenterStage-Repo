@@ -131,7 +131,8 @@ public class TensorCore {
         visionPortal = builder.build();
 
         // Set confidence threshold for TFOD recognitions, at any time.
-        tfod.setMinResultConfidence(0.6f);
+        if (file.contains("Red")) tfod.setMinResultConfidence(0.6f);
+        else tfod.setMinResultConfidence(0.9f);
 
         // Disable or re-enable the TFOD processor at any time.
         //visionPortal.setProcessorEnabled(tfod, true);
@@ -146,9 +147,11 @@ public class TensorCore {
         List<Recognition> currentRecognitions = tfod.getRecognitions();
         telemetry.addData("# Objects Detected", currentRecognitions.size());
         double x = 0;
+        if (currentRecognitions.size() == 0) x = 0;
+        x = 0;
 
-        // Step through the list of recognitions and display info for each one.
         for (Recognition recognition : currentRecognitions) {
+            x = 0;
             x = (recognition.getLeft() + recognition.getRight()) / 2 ;
             double y = (recognition.getTop()  + recognition.getBottom()) / 2 ;
 
@@ -157,8 +160,34 @@ public class TensorCore {
             telemetry.addData("- Position", "%.0f / %.0f", x, y);
             telemetry.addData("- Size", "%.0f x %.0f", recognition.getWidth(), recognition.getHeight());
             return x;
-        }   // end for() loop
+        }
         return x;
-    }   // end method telemetryTfod()
+    }
+
+    public String getPos(String color, double x){
+        if (color.equalsIgnoreCase("red")){
+            if (x >= (30 - 50) && x <= (30 + 50)){
+                return "left";
+            }
+            if (x >= (280 - 50) && x <= (280 + 50)){
+                return "middle";
+            }
+            if (x >= (515 - 50) && x <= (515 + 50)){
+                return "right";
+            }
+        }
+        if (color.equalsIgnoreCase("blue")){
+            if (x >= (205 - 50) && x <= (205 + 50)){
+                return "left";
+            }
+            if (x >= (430 - 50) && x <= (430 + 50)){
+                return "middle";
+            }
+            else {
+                return "right";
+            }
+        }
+        return "";
+    }
 
 }   // end class

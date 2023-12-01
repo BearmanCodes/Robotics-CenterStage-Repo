@@ -30,12 +30,13 @@
 package org.firstinspires.ftc.teamcode.Auto.Red.Left;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
-
+@Disabled
 @Autonomous(name="LeftRedRight", group="LeftRed")
 public class LeftRedRight extends LinearOpMode {
 

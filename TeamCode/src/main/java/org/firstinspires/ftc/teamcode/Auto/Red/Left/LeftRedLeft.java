@@ -30,13 +30,16 @@
 package org.firstinspires.ftc.teamcode.Auto.Red.Left;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
+import java.lang.System;
 import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.TensorCore;
-
+@Disabled
 @Autonomous(name="LeftRedLeft", group="LeftRed")
 public class LeftRedLeft extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Red.tflite";
@@ -50,7 +53,11 @@ public class LeftRedLeft extends LinearOpMode {
     ServoAutoCore servoAutoCore = new ServoAutoCore();
     TensorCore tensorCore = new TensorCore();
 
+    ElapsedTime time = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
+
     double x;
+
+    String pos;
 
 
     @Override
@@ -62,12 +69,9 @@ public class LeftRedLeft extends LinearOpMode {
 
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
-        x = tensorCore.telemetryTfod(telemetry);
-        while (x == 0){
-            x = tensorCore.telemetryTfod(telemetry);
-        }
-        tensorCore.visionPortal.close();
-        x = tensorCore.telemetryTfod(telemetry);
+
+
+
         driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 15); //change this to line up with left tape
         driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //change this to where arm reaches
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //keep this
@@ -84,6 +88,21 @@ public class LeftRedLeft extends LinearOpMode {
         armAutoCore.init(hardwareMap);
         servoAutoCore.init(hardwareMap);
         tensorCore.initTfod(hardwareMap, LABELS, TFOD_MODEL_ASSET);
+        x = tensorCore.telemetryTfod(telemetry);
+        time.reset();
+        while (x == 0 || time.time() >= 6.5){
+            x = tensorCore.telemetryTfod(telemetry);
+        }
+        x = tensorCore.telemetryTfod(telemetry);
+        pos = tensorCore.getPos("red", x);
+        tensorCore.visionPortal.close();
+    }
+
+    public void decide(String position){
+        switch (position){
+            case "left":
+
+        }
     }
 }
 
