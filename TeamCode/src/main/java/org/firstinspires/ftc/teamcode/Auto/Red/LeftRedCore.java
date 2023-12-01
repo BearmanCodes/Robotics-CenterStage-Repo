@@ -136,4 +136,8 @@ public class LeftRedCore extends LinearOpMode {
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
+
+    //Middle around 442x
+    //Left around 193x
+    //Right not in camera view as of now
 }

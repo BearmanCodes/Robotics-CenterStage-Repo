@@ -67,8 +67,16 @@ public class LeftBlueCore extends LinearOpMode {
 
         x = tensorCore.telemetryTfod(telemetry);
         time.reset();
-        while (x == 0 || time.time() < 6.5){
+        double t = time.time();
+        while (x == 0 || t < 6){
             x = tensorCore.telemetryTfod(telemetry);
+            t = time.time();
+            if (t >= 6){
+                break;
+            }
+            telemetry.addData("time", t);
+            telemetry.addData("x", x);
+            telemetry.update();
         }
         x = tensorCore.telemetryTfod(telemetry);
         pos = tensorCore.getPos("blue", x);

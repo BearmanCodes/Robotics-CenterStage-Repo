@@ -171,7 +171,7 @@ public class DriveAutoCore {
             if (active) {
                 if (target < 0) {
                     while (Yaw > target) {
-                        setMotorVelocity(300, -300, 300, -300);
+                        setMotorVelocity(600, -600, 600, -600);
                         robotOrientation = imu.getRobotYawPitchRollAngles();
                         Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                     }
@@ -181,7 +181,7 @@ public class DriveAutoCore {
                         Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                         double error = Yaw - target;
                         while (Math.abs(error) > 0.2) {
-                            setMotorVelocity(-300, 300, -300, 300);
+                            setMotorVelocity(-600, 600, -600, 600);
                             robotOrientation = imu.getRobotYawPitchRollAngles();
                             Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                             error = Yaw - target;
@@ -191,7 +191,7 @@ public class DriveAutoCore {
                 }
                 if (target > 0){
                     while (Yaw < target) {
-                        setMotorVelocity(-300, 300, -300, 300);
+                        setMotorVelocity(-600, 600, -600, 600);
                         robotOrientation = imu.getRobotYawPitchRollAngles();
                         Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                     }
@@ -201,7 +201,7 @@ public class DriveAutoCore {
                         Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                         double error = Yaw - target;
                         while (Math.abs(error) > 0.2) {
-                            setMotorVelocity(300, -300, 300, -300);
+                            setMotorVelocity(600, -600, 600, -600);
                             robotOrientation = imu.getRobotYawPitchRollAngles();
                             Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                             error = Yaw - target;

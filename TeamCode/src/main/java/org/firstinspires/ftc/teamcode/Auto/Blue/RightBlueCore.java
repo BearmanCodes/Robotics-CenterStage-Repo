@@ -65,10 +65,24 @@ public class RightBlueCore extends LinearOpMode {
 
         waitForStart();
 
+        x = tensorCore.telemetryTfod(telemetry);
+        time.reset();
+        while (x == 0 || time.time() < 1){
+            x = tensorCore.telemetryTfod(telemetry);
+        }
+        x = tensorCore.telemetryTfod(telemetry);
+        pos = tensorCore.getPos("blue", x);
+        tensorCore.visionPortal.close();
+        telemetry.addData("Pos: ", x);
+        telemetry.update();
+
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        sleep(250);
+        sleep(750);
 
         decide(pos);
+        //Middle around 302x
+        //Right around 526 x
+        //Left around 33x
     }
 
     private void initialize() {
@@ -76,14 +90,7 @@ public class RightBlueCore extends LinearOpMode {
         armAutoCore.init(hardwareMap);
         servoAutoCore.init(hardwareMap);
         tensorCore.initTfod(hardwareMap, LABELS, TFOD_MODEL_ASSET);
-        x = tensorCore.telemetryTfod(telemetry);
-        time.reset();
-        while (x == 0 || time.time() >= 6.5){
-            x = tensorCore.telemetryTfod(telemetry);
-        }
-        x = tensorCore.telemetryTfod(telemetry);
-        pos = tensorCore.getPos("blue", x);
-        tensorCore.visionPortal.close();
+
     }
 
     public void decide(String position) throws InterruptedException {
