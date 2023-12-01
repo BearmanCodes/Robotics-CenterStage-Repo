@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 @Disabled
-@Autonomous(name="LeftBlue", group="Blue")
+@Autonomous(name="Help", group="Blue")
 public class LeftBlue extends LinearOpMode {
 
     private DcMotorEx frontLeft, frontRight, backLeft, backRight, arm;
