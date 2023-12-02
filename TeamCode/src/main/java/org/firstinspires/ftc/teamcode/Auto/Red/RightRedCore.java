@@ -38,7 +38,7 @@ import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.TensorCore;
 
-
+//COMPLETE
 @Autonomous(name="RightRed", group="Red")
 public class RightRedCore extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Red.tflite";
@@ -65,8 +65,27 @@ public class RightRedCore extends LinearOpMode {
 
         waitForStart();
 
+        x = tensorCore.telemetryTfod(telemetry);
+        time.reset();
+        double t = time.time();
+        while (x == 0 || t < 6){
+            x = tensorCore.telemetryTfod(telemetry);
+            t = time.time();
+            if (t >= 6){
+                break;
+            }
+            telemetry.addData("time", t);
+            telemetry.addData("x", x);
+            telemetry.update();
+        }
+        x = tensorCore.telemetryTfod(telemetry);
+        pos = tensorCore.getPos("rred", x);
+        tensorCore.visionPortal.close();
+        telemetry.addData("Pos: ", x);
+        telemetry.update();
+
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        sleep(250);
+        sleep(150);
 
         decide(pos);
     }
@@ -76,14 +95,6 @@ public class RightRedCore extends LinearOpMode {
         armAutoCore.init(hardwareMap);
         servoAutoCore.init(hardwareMap);
         tensorCore.initTfod(hardwareMap, LABELS, TFOD_MODEL_ASSET);
-        x = tensorCore.telemetryTfod(telemetry);
-        time.reset();
-        while (x == 0 || time.time() >= 6.5){
-            x = tensorCore.telemetryTfod(telemetry);
-        }
-        x = tensorCore.telemetryTfod(telemetry);
-        pos = tensorCore.getPos("red", x);
-        tensorCore.visionPortal.close();
     }
 
     public void decide(String position) throws InterruptedException {
@@ -103,14 +114,14 @@ public class RightRedCore extends LinearOpMode {
         driveAutoCore.strafeRight(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
         driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
         driveAutoCore.turnAmount(90, opModeIsActive()); //Keep this
-        driveAutoCore.fwdDrive(750, 17, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
+        driveAutoCore.fwdDrive(750, 15, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
         servoAutoCore.lClaw.setPosition(0.23);  //Keep this
         sleep(150); //Keep this
         armAutoCore.move(500, 150, opModeIsActive(), 250); //Keep this
         driveAutoCore.strafeLeft(750, 23, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.revDrive(2000, 43, opModeIsActive(), 12); //This is 42 - whatever we strafed right (deviated from original)
+        driveAutoCore.revDrive(2000, 40, opModeIsActive(), 12); //This is 42 - whatever we strafed right (deviated from original)
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
@@ -130,13 +141,13 @@ public class RightRedCore extends LinearOpMode {
     }
 
     public void MiddleGo() throws InterruptedException{
-        driveAutoCore.fwdDrive(750, 21, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 19, opModeIsActive(), 12);
         armAutoCore.move(500, 1350, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
         armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 19, opModeIsActive(), 12);
+        driveAutoCore.revDrive(750, 17, opModeIsActive(), 12);
         driveAutoCore.strafeRight(2000, 42, opModeIsActive(), 12);
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)

@@ -166,7 +166,7 @@ public class TensorCore {
     }
 
     public String getPos(String color, double x){
-        if (color.equalsIgnoreCase("red")){
+        if (color.equalsIgnoreCase("rred")){
             if (x >= (30 - 50) && x <= (30 + 50)){
                 return "left";
             }
@@ -177,7 +177,18 @@ public class TensorCore {
                 return "right";
             }
         }
-        if (color.equalsIgnoreCase("blue")){
+        if (color.equalsIgnoreCase("lred")){
+            if (x >= (190 - 50) && x <= (190 + 50)){
+                return "left";
+            }
+            if (x >= (440 - 50) && x <= (440 + 50)){
+                return "middle";
+            }
+            else {
+                return "right";
+            }
+        }
+        if (color.equalsIgnoreCase("lblue")){
             if (x >= (205 - 50) && x <= (205 + 50)){
                 return "left";
             }
@@ -185,6 +196,17 @@ public class TensorCore {
                 return "middle";
             }
             else {
+                return "right";
+            }
+        }
+        if (color.equalsIgnoreCase("rblue")){
+            if (x >= (30 - 50) && x <= (30 + 50)){
+                return "left";
+            }
+            if (x >= (300 - 50) && x <= (300 + 50)){
+                return "middle";
+            }
+            if (x >= (525 - 50) && x <= (525 + 50)){
                 return "right";
             }
         }

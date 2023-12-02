@@ -55,13 +55,13 @@ public class RightRedMiddle extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
-        driveAutoCore.fwdDrive(750, 21, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 19, opModeIsActive(), 12);
         armAutoCore.move(500, 1350, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
         armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 19, opModeIsActive(), 12);
+        driveAutoCore.revDrive(750, 17, opModeIsActive(), 12);
         driveAutoCore.strafeRight(2000, 42, opModeIsActive(), 12);
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)

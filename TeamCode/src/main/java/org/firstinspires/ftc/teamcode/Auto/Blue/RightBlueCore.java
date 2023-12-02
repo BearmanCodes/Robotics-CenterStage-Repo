@@ -38,7 +38,7 @@ import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.TensorCore;
 
-
+//COMPLETE
 @Autonomous(name="RightBlue", group="Blue")
 public class RightBlueCore extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Blue.tflite";
@@ -67,17 +67,25 @@ public class RightBlueCore extends LinearOpMode {
 
         x = tensorCore.telemetryTfod(telemetry);
         time.reset();
-        while (x == 0 || time.time() < 1){
+        double t = time.time();
+        while (x == 0 || t < 6){
             x = tensorCore.telemetryTfod(telemetry);
+            t = time.time();
+            if (t >= 6){
+                break;
+            }
+            telemetry.addData("time", t);
+            telemetry.addData("x", x);
+            telemetry.update();
         }
         x = tensorCore.telemetryTfod(telemetry);
-        pos = tensorCore.getPos("blue", x);
+        pos = tensorCore.getPos("rblue", x);
         tensorCore.visionPortal.close();
         telemetry.addData("Pos: ", x);
         telemetry.update();
 
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        sleep(750);
+        sleep(150);
 
         decide(pos);
         //Middle around 302x
@@ -110,7 +118,7 @@ public class RightBlueCore extends LinearOpMode {
         driveAutoCore.strafeRight(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
         driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
         driveAutoCore.turnAmount(90, opModeIsActive()); //Keep this
-        driveAutoCore.fwdDrive(750, 17, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
+        driveAutoCore.fwdDrive(750, 15, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
         servoAutoCore.lClaw.setPosition(0.23);  //Keep this
@@ -133,7 +141,7 @@ public class RightBlueCore extends LinearOpMode {
     }
 
     public void MiddleGo() throws InterruptedException{
-        driveAutoCore.fwdDrive(750, 21, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 19, opModeIsActive(), 12);
         armAutoCore.move(500, 1350, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
         servoAutoCore.lClaw.setPosition(0.23);
