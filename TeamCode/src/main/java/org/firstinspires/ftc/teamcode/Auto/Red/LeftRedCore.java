@@ -125,9 +125,9 @@ public class LeftRedCore extends LinearOpMode {
 
     public void RightGo() throws InterruptedException{
         driveAutoCore.strafeLeft(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
-        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12); //Change this to how far we need to be to line up with right tape once turned
+        driveAutoCore.fwdDrive(750, 28.5, opModeIsActive(), 12); //Change this to how far we need to be to line up with right tape once turned
         driveAutoCore.turnAmount(-90, opModeIsActive()); //Keep this
-        driveAutoCore.fwdDrive(750, 15, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach right tape
+        driveAutoCore.fwdDrive(750, 10.5, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach right tape
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
         servoAutoCore.lClaw.setPosition(0.23);  //Keep this

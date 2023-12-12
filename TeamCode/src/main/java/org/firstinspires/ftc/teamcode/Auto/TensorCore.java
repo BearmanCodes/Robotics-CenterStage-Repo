@@ -143,7 +143,6 @@ public class TensorCore {
      * Add telemetry about TensorFlow Object Detection (TFOD) recognitions.
      */
     public double telemetryTfod(Telemetry telemetry) {
-
         List<Recognition> currentRecognitions = tfod.getRecognitions();
         telemetry.addData("# Objects Detected", currentRecognitions.size());
         double x = 0;
