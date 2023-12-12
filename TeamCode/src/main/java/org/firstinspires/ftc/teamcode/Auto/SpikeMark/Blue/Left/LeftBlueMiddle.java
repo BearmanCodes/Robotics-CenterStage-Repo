@@ -27,37 +27,22 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.Red.Left;
+package org.firstinspires.ftc.teamcode.Auto.SpikeMark.Blue.Left;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-import java.lang.System;
 import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
-import org.firstinspires.ftc.teamcode.Auto.TensorCore;
 @Disabled
-@Autonomous(name="LeftRedLeft", group="LeftRed")
-public class LeftRedLeft extends LinearOpMode {
-    private static final String TFOD_MODEL_ASSET = "Red.tflite";
-
-    private static final String[] LABELS = {
-            "Red",
-    };
+@Autonomous(name="LeftBlueMiddle", group="LeftBlue")
+public class LeftBlueMiddle extends LinearOpMode {
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
     ArmAutoCore armAutoCore = new ArmAutoCore();
     ServoAutoCore servoAutoCore = new ServoAutoCore();
-    TensorCore tensorCore = new TensorCore();
-
-    ElapsedTime time = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
-
-    double x;
-
-    String pos;
 
 
     @Override
@@ -70,15 +55,14 @@ public class LeftRedLeft extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
-
-
-        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 15); //change this to line up with left tape
-        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //change this to where arm reaches
-        armAutoCore.move(500, 1350, opModeIsActive(), 250); //keep this
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //keep this
-        servoAutoCore.lClaw.setPosition(0.23);  //keep this
-        sleep(150); //keep this
-        armAutoCore.move(500, 150, opModeIsActive(), 250); //keep this
+        driveAutoCore.fwdDrive(750, 19, opModeIsActive(), 12);
+        armAutoCore.move(500, 1350, opModeIsActive(), 250);
+        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
+        servoAutoCore.lClaw.setPosition(0.23);
+        sleep(150);
+        armAutoCore.move(500, 150, opModeIsActive(), 250);
+        driveAutoCore.revDrive(750, 17, opModeIsActive(), 12);
+        driveAutoCore.strafeLeft(2000, 42, opModeIsActive(), 12);
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
@@ -87,22 +71,6 @@ public class LeftRedLeft extends LinearOpMode {
         driveAutoCore.init(hardwareMap);
         armAutoCore.init(hardwareMap);
         servoAutoCore.init(hardwareMap);
-        tensorCore.initTfod(hardwareMap, LABELS, TFOD_MODEL_ASSET);
-        x = tensorCore.telemetryTfod(telemetry);
-        time.reset();
-        while (x == 0 || time.time() >= 6.5){
-            x = tensorCore.telemetryTfod(telemetry);
-        }
-        x = tensorCore.telemetryTfod(telemetry);
-        pos = tensorCore.getPos("red", x);
-        tensorCore.visionPortal.close();
-    }
-
-    public void decide(String position){
-        switch (position){
-            case "left":
-
-        }
     }
 }
 

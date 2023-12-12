@@ -28,8 +28,10 @@ public class servoTest extends LinearOpMode {
         // lservo 0.96 (close)
         // r servo 1.00 (close)
         // lservo 0.8 (open)
+
+        //36 and 55 reverse
         // r servo 0.8 (open)
-        lservo.setDirection(Servo.Direction.FORWARD);
+        lservo.setDirection(Servo.Direction.REVERSE);
         rservo.setDirection(Servo.Direction.FORWARD);
         waitForStart();
         while (opModeIsActive()){

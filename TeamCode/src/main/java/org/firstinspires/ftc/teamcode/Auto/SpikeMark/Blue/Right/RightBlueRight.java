@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.Blue.Right;
+package org.firstinspires.ftc.teamcode.Auto.SpikeMark.Blue.Right;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -37,8 +37,8 @@ import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 @Disabled
-@Autonomous(name="RightBlueLeft", group="RightBlue")
-public class RightBlueLeft extends LinearOpMode {
+@Autonomous(name="RightBlueRight", group="RightBlue")
+public class RightBlueRight extends LinearOpMode {
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
     ArmAutoCore armAutoCore = new ArmAutoCore();
@@ -55,15 +55,13 @@ public class RightBlueLeft extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
-        driveAutoCore.strafeRight(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
-        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
-        driveAutoCore.turnAmount(90, opModeIsActive()); //Keep this
-        driveAutoCore.fwdDrive(750, 15, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
-        armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
-        servoAutoCore.lClaw.setPosition(0.23);  //Keep this
-        sleep(150); //Keep this
-        armAutoCore.move(500, 150, opModeIsActive(), 250); //Keep this
+        driveAutoCore.strafeRight(750, 6, opModeIsActive(), 15); //change this to line up with right tape
+        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //change this to where arm reaches
+        armAutoCore.move(500, 1350, opModeIsActive(), 250); //keep this
+        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //keep this
+        servoAutoCore.lClaw.setPosition(0.23);  //keep this
+        sleep(150); //keep this
+        armAutoCore.move(500, 150, opModeIsActive(), 250); //keep this
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }

@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.Blue.Left;
+package org.firstinspires.ftc.teamcode.Auto.SpikeMark.Blue.Right;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -37,8 +37,8 @@ import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 @Disabled
-@Autonomous(name="LeftBlueMiddle", group="LeftBlue")
-public class LeftBlueMiddle extends LinearOpMode {
+@Autonomous(name="RightBlueMiddle", group="RightBlue")
+public class RightBlueMiddle extends LinearOpMode {
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
     ArmAutoCore armAutoCore = new ArmAutoCore();
@@ -61,8 +61,6 @@ public class LeftBlueMiddle extends LinearOpMode {
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
         armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 17, opModeIsActive(), 12);
-        driveAutoCore.strafeLeft(2000, 42, opModeIsActive(), 12);
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }

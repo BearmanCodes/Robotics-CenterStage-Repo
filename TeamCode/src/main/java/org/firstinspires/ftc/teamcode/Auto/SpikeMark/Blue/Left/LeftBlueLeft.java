@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.Red.Right;
+package org.firstinspires.ftc.teamcode.Auto.SpikeMark.Blue.Left;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -37,8 +37,8 @@ import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 @Disabled
-@Autonomous(name="RightRedMiddle", group="RightRed")
-public class RightRedMiddle extends LinearOpMode {
+@Autonomous(name="LeftBlueLeft", group="LeftBlue")
+public class LeftBlueLeft extends LinearOpMode {
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
     ArmAutoCore armAutoCore = new ArmAutoCore();
@@ -55,14 +55,15 @@ public class RightRedMiddle extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
-        driveAutoCore.fwdDrive(750, 19, opModeIsActive(), 12);
+        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 15); //Wherever to line up with left tape
+        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //However much to line up arm
         armAutoCore.move(500, 1350, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
         armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 17, opModeIsActive(), 12);
-        driveAutoCore.strafeRight(2000, 42, opModeIsActive(), 12);
+        driveAutoCore.revDrive(750, 13, opModeIsActive(), 12); // Make this whatever we drove forward -2
+        driveAutoCore.strafeLeft(2000, 36   , opModeIsActive(), 12); //This is 42 - whatever we strafed left
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }

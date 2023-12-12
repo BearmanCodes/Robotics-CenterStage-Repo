@@ -25,6 +25,7 @@ public class MasonDrive extends LinearOpMode {
             }
             dTrain.run(gamepad1);
             armCore.rStick(gamepad2);
+            servoCore.airLaunch();
             servoCore.dpadRun();
         }
     }
