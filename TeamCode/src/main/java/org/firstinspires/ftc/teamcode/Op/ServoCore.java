@@ -13,6 +13,8 @@ public class ServoCore {
     Gamepad previousGamepad2 = new Gamepad();
 
     public Servo lClaw, rClaw, airplane;
+
+    Boolean launched = false;
     boolean clawstat;
 
     public void init(HardwareMap hwMap){
@@ -44,6 +46,7 @@ public class ServoCore {
     public void airLaunch(){
         if (currentGamepad.x && !previousGamepad.x){
             airplane.setPosition(0.55);
+            launched = true;
         }
     }
 
