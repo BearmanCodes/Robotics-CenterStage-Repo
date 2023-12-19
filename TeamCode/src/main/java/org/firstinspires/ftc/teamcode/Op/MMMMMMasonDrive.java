@@ -30,7 +30,7 @@ public class MMMMMMasonDrive extends LinearOpMode {
             dTrain.run(gamepad1);
             armCore.trigger(gamepad2);
             servoCore.toggleRun();
-            servoCore.airLaunch();
+            servoCore.airLaunch(telemetry);
 
         }
     }

@@ -4,6 +4,9 @@ import com.qualcomm.robotcore.exception.RobotCoreException;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class ServoCore {
     Gamepad currentGamepad = new Gamepad();
@@ -14,8 +17,12 @@ public class ServoCore {
 
     public Servo lClaw, rClaw, airplane;
 
+    public DrivetrainCore dTrain = new DrivetrainCore();
+
     Boolean launched = false;
     boolean clawstat;
+
+    ElapsedTime time = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
 
     public void init(HardwareMap hwMap){
         rClaw = hwMap.get(Servo.class, "rclaw".toLowerCase());
@@ -43,7 +50,7 @@ public class ServoCore {
         }
     }
 
-    public void airLaunch(){
+    public void airLaunch(Telemetry telemetry){
         if (currentGamepad.x && !previousGamepad.x){
             airplane.setPosition(0.55);
             launched = true;

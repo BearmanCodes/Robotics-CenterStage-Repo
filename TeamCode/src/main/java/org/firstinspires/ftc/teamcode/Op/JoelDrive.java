@@ -30,7 +30,7 @@ public class JoelDrive extends LinearOpMode {
             dTrain.run(gamepad1);
             armCore.lStick(gamepad2);
             servoCore.toggleRun();
-            servoCore.airLaunch();
+            servoCore.airLaunch(telemetry);
         }
     }
 
