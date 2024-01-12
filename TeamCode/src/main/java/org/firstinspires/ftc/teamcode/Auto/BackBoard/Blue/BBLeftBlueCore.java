@@ -27,9 +27,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.SpikeMark.Blue;
+package org.firstinspires.ftc.teamcode.Auto.BackBoard.Blue;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -38,9 +39,10 @@ import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.TensorCore;
 
-//COMPLETE
-@Autonomous(name="LeftBlue", group="Blue") //Autonomous for left of the blue side
-public class LeftBlueCore extends LinearOpMode {
+//PSUEDO
+@Disabled
+@Autonomous
+public class BBLeftBlueCore extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "Blue.tflite";
     private static final String[] LABELS = {
             "Blue",
@@ -117,15 +119,14 @@ public class LeftBlueCore extends LinearOpMode {
     }//Decides which auto function to execute depending on what tensorflow returns
 
     public void LeftGo() throws InterruptedException {
-        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 15); //Wherever to line up with left tape
-        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //However much to line up arm
-        armAutoCore.move(500, 1350, opModeIsActive(), 250);
+        driveAutoCore.fwdDrive(750, 26.5, opModeIsActive(), 12); //However much to line up left side of backboard
+        driveAutoCore.turnAmount(-90, opModeIsActive()); //Face backboard
+        driveAutoCore.fwdDrive(500, 36, opModeIsActive(), 500); //Drive so arm reach
+        armAutoCore.move(500, 750, opModeIsActive(), 250); //Move arm however amount ticks
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
         armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 13, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.strafeLeft(2000, 36, opModeIsActive(), 12); //This is 42 - whatever we strafed left
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }

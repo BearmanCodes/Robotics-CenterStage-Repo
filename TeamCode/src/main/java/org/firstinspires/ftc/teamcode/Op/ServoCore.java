@@ -13,9 +13,9 @@ public class ServoCore {
     Gamepad previousGamepad = new Gamepad();
 
     Gamepad currentGamepad2 = new Gamepad();
-    Gamepad previousGamepad2 = new Gamepad();
+    Gamepad previousGamepad2 = new Gamepad(); //Set up gamepad variables allowing for rising edge detector
 
-    public Servo lClaw, rClaw, airplane;
+    public Servo lClaw, rClaw, airplane; //Declare servo variables
 
     public DrivetrainCore dTrain = new DrivetrainCore();
 
@@ -48,6 +48,22 @@ public class ServoCore {
             lClaw.setPosition(0.8); //(open)
             rClaw.setPosition(0.8); //(open)
         }
+        if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left){
+            clawstat = !clawstat;
+            if(clawstat){
+                lClaw.setPosition(0.8); //(open)
+            } else {
+                lClaw.setPosition(0.96); //(close)
+            }
+        }
+        if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right){
+            clawstat = !clawstat;
+            if(clawstat){
+                rClaw.setPosition(0.8); //(open)
+            } else {
+                rClaw.setPosition(0.96); //(close)
+            }
+        }
     }
 
     public void airLaunch(Telemetry telemetry){
@@ -72,6 +88,8 @@ public class ServoCore {
         }
     }
 
+    /*Edge detector, super important so that the stupid functions
+    don't think every ms you hold the button it should execute*/
     public void edgeDetector(Gamepad gamepad1, Gamepad gamepad2) throws RobotCoreException {
         previousGamepad.copy(currentGamepad);
         currentGamepad.copy(gamepad1);

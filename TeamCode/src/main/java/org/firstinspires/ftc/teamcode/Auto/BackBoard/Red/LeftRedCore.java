@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.SpikeMark.Blue;
+package org.firstinspires.ftc.teamcode.Auto.BackBoard.BackBoard.Red;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -39,11 +39,11 @@ import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.TensorCore;
 
 //COMPLETE
-@Autonomous(name="LeftBlue", group="Blue") //Autonomous for left of the blue side
-public class LeftBlueCore extends LinearOpMode {
-    private static final String TFOD_MODEL_ASSET = "Blue.tflite";
+@Autonomous(name="LeftRed", group="Red")
+public class LeftRedCore extends LinearOpMode {
+    private static final String TFOD_MODEL_ASSET = "Red.tflite";
     private static final String[] LABELS = {
-            "Blue",
+            "Red",
     };
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
@@ -79,15 +79,10 @@ public class LeftBlueCore extends LinearOpMode {
             telemetry.update();
         }
         x = tensorCore.telemetryTfod(telemetry);
-        pos = tensorCore.getPos("lblue", x);
+        pos = tensorCore.getPos("lred", x);
         tensorCore.visionPortal.close();
         telemetry.addData("Pos: ", x);
         telemetry.update();
-
-        /*The code above is quite possibly the stupidest code I have ever written
-        x should be equal to whatever tensorflow returns when it detects the object and its position
-        HOWEVER, because the camera can't see one side, wait 6 seconds and if detcts nothing just
-        say it's that side, like I said, so stupid but it works, please make this better I BEG*/
 
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(150);
@@ -100,7 +95,6 @@ public class LeftBlueCore extends LinearOpMode {
         armAutoCore.init(hardwareMap);
         servoAutoCore.init(hardwareMap);
         tensorCore.initTfod(hardwareMap, LABELS, TFOD_MODEL_ASSET);
-
     }
 
     public void decide(String position) throws InterruptedException {
@@ -114,34 +108,30 @@ public class LeftBlueCore extends LinearOpMode {
             case "middle":
                 MiddleGo();
         }
-    }//Decides which auto function to execute depending on what tensorflow returns
+    }
 
     public void LeftGo() throws InterruptedException {
-        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 15); //Wherever to line up with left tape
-        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //However much to line up arm
-        armAutoCore.move(500, 1350, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
-        servoAutoCore.lClaw.setPosition(0.23);
-        sleep(150);
-        armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 13, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.strafeLeft(2000, 36, opModeIsActive(), 12); //This is 42 - whatever we strafed left
+        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 15); //change this to line up with left tape
+        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //change this to where arm reaches
+        armAutoCore.move(500, 1350, opModeIsActive(), 250); //keep this
+        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //keep this
+        servoAutoCore.lClaw.setPosition(0.23);  //keep this
+        sleep(150); //keep this
+        armAutoCore.move(500, 150, opModeIsActive(), 250); //keep this
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
     public void RightGo() throws InterruptedException{
         driveAutoCore.strafeLeft(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
-        driveAutoCore.fwdDrive(750, 24.25, opModeIsActive(), 12); //Change this to how far we need to be to line up with right tape once turned
+        driveAutoCore.fwdDrive(750, 28.5, opModeIsActive(), 12); //Change this to how far we need to be to line up with right tape once turned
         driveAutoCore.turnAmount(-90, opModeIsActive()); //Keep this
-        driveAutoCore.fwdDrive(750, 13.5, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach right tape
+        driveAutoCore.fwdDrive(750, 10.5, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach right tape
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
         servoAutoCore.lClaw.setPosition(0.23);  //Keep this
         sleep(150); //Keep this
         armAutoCore.move(500, 150, opModeIsActive(), 250); //Keep this
-        driveAutoCore.strafeRight(750, 22, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.revDrive(2000, 34, opModeIsActive(), 12); //This is 42 - whatever we strafed right (deviated from original)
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
@@ -153,11 +143,11 @@ public class LeftBlueCore extends LinearOpMode {
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
         armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 17, opModeIsActive(), 12);
-        driveAutoCore.strafeLeft(2000, 42, opModeIsActive(), 12);
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
-    //The auto functions depending on whether it's spike mark center, left, or middle are above
+    //Middle around 442x
+    //Left around 193x
+    //Right not in camera view as of now
 }

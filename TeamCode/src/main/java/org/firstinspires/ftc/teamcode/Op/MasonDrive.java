@@ -26,23 +26,16 @@ public class MasonDrive extends LinearOpMode {
             } catch (RobotCoreException e) {
                 throw new RuntimeException(e);
             }
-            if (servoCore.time.time() >= 90 && !servoCore.launched){
-                telemetry.addData("Time: ", servoCore.time.time());
-                telemetry.update();
+            if (servoCore.time.time() >= 90 && !servoCore.launched){ //Make sure you can't launch it before endgame
                 servoCore.airLaunch(telemetry);
-                /*
-                if (servoCore.launched) {
-                    dAuto.revDrive(99999999, 4, opModeIsActive(), 0);
-                    dAuto.fwdDrive(99999999, 1, opModeIsActive(), 0);
-                }
-                */
+            }
+            if (servoCore.currentGamepad.y && !servoCore.previousGamepad.y){
+                dTrain.Flip(opModeIsActive(), telemetry);
             }
             dTrain.run(gamepad1);
             armCore.rStick(gamepad2);
             armCore.Arm(gamepad2);
             servoCore.dpadRun();
-            telemetry.addData("Time: ", servoCore.time.time());
-            telemetry.update();
         }
     }
 
