@@ -119,7 +119,7 @@ public class BBLeftBlueCore extends LinearOpMode {
     }//Decides which auto function to execute depending on what tensorflow returns
 
     public void LeftGo() throws InterruptedException {
-        driveAutoCore.fwdDrive(750, 26.5, opModeIsActive(), 12); //However much to line up left side of backboard
+        driveAutoCore.fwdDrive(750, 30, opModeIsActive(), 12); //However much to line up left side of backboard
         driveAutoCore.turnAmount(-90, opModeIsActive()); //Face backboard
         driveAutoCore.fwdDrive(500, 36, opModeIsActive(), 500); //Drive so arm reach
         armAutoCore.move(500, 750, opModeIsActive(), 250); //Move arm however amount ticks
@@ -132,30 +132,27 @@ public class BBLeftBlueCore extends LinearOpMode {
     }
 
     public void RightGo() throws InterruptedException{
-        driveAutoCore.strafeLeft(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
-        driveAutoCore.fwdDrive(750, 24.25, opModeIsActive(), 12); //Change this to how far we need to be to line up with right tape once turned
-        driveAutoCore.turnAmount(-90, opModeIsActive()); //Keep this
-        driveAutoCore.fwdDrive(750, 13.5, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach right tape
-        armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
-        servoAutoCore.lClaw.setPosition(0.23);  //Keep this
-        sleep(150); //Keep this
-        armAutoCore.move(500, 150, opModeIsActive(), 250); //Keep this
-        driveAutoCore.strafeRight(750, 22, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.revDrive(2000, 34, opModeIsActive(), 12); //This is 42 - whatever we strafed right (deviated from original)
+        driveAutoCore.fwdDrive(750, 35, opModeIsActive(), 12); //However much to line up right side of backboard
+        driveAutoCore.turnAmount(-90, opModeIsActive()); //Face backboard
+        driveAutoCore.fwdDrive(500, 36, opModeIsActive(), 500); //Drive so arm reach
+        armAutoCore.move(500, 750, opModeIsActive(), 250); //Move arm however amount ticks
+        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
+        servoAutoCore.lClaw.setPosition(0.23);
+        sleep(150);
+        armAutoCore.move(500, 150, opModeIsActive(), 250);
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
     public void MiddleGo() throws InterruptedException{
-        driveAutoCore.fwdDrive(750, 19, opModeIsActive(), 12);
-        armAutoCore.move(500, 1350, opModeIsActive(), 250);
+        driveAutoCore.fwdDrive(750, 32.5, opModeIsActive(), 12); //However much to line up middle side of backboard
+        driveAutoCore.turnAmount(-90, opModeIsActive()); //Face backboard
+        driveAutoCore.fwdDrive(500, 36, opModeIsActive(), 500); //Drive so arm reach
+        armAutoCore.move(500, 750, opModeIsActive(), 250); //Move arm however amount ticks
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
         servoAutoCore.lClaw.setPosition(0.23);
         sleep(150);
         armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 17, opModeIsActive(), 12);
-        driveAutoCore.strafeLeft(2000, 42, opModeIsActive(), 12);
         servoAutoCore.lClaw.setPosition(0.8); //(open)
         servoAutoCore.rClaw.setPosition(0.8); //(open)
     }

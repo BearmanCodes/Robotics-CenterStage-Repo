@@ -33,7 +33,7 @@ public class MasonDrive extends LinearOpMode {
                 dTrain.Flip(opModeIsActive(), telemetry);
             }
             dTrain.run(gamepad1);
-            armCore.rStick(gamepad2);
+            armCore.rStick(gamepad2, telemetry);
             armCore.Arm(gamepad2);
             servoCore.dpadRun();
         }

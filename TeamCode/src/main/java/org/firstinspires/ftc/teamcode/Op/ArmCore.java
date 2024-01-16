@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 //This is the core arm class every single TeleOp uses to access functions pertaining to the arm
 public class ArmCore {
 
@@ -32,12 +34,12 @@ public class ArmCore {
     }
 
     //This uses the right stick to move the arm as used in Mason S.'s op mode
-    public void rStick(Gamepad gamepad2){
-        //if (armMotor.getCurrentPosition() //Tolerances where it's after middle)
-        armPower = ((gamepad2.right_stick_y) * reducerArm) - 0.00225;
-        //else if (armMotor.getCurrentPosition() //Tolerances where it's before middle)
-        //armPower = ((gamepad2.right_stick_y) * reducerArm) + 0.00050;
+    public void rStick(Gamepad gamepad2, Telemetry telemetry){
+        if (armMotor.getCurrentPosition() >= 415) armPower = ((gamepad2.right_stick_y) * reducerArm) - 0.00225;
+        else if (armMotor.getCurrentPosition() <= 414) armPower = ((gamepad2.right_stick_y) * reducerArm) + 0.00050;
         armMotor.setPower(armPower);
+        telemetry.addData("ArmPos: ", armMotor.getCurrentPosition());
+        telemetry.update();
     }
 
     //This uses the left stick to move the arm as used in Joel's op mode
