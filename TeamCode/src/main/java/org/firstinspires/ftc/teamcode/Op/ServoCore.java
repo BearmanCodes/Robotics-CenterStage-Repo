@@ -41,27 +41,29 @@ public class ServoCore {
     public void dpadRun(){
 
         if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up){
-            lClaw.setPosition(0.96); //(close)
+            clawstat = !clawstat;
+            lClaw.setPosition(1.00); //(close)
             rClaw.setPosition(1.00); //(close)
         }
         if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down){
-            lClaw.setPosition(0.8); //(open)
-            rClaw.setPosition(0.8); //(open)
-        }
-        if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left){
             clawstat = !clawstat;
-            if(clawstat){
-                lClaw.setPosition(0.8); //(open)
-            } else {
-                lClaw.setPosition(0.96); //(close)
-            }
+            lClaw.setPosition(0.65); //(open)
+            rClaw.setPosition(0.65); //(open)
         }
         if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right){
             clawstat = !clawstat;
             if(clawstat){
-                rClaw.setPosition(0.8); //(open)
+                lClaw.setPosition(0.65); //(open)
             } else {
-                rClaw.setPosition(0.96); //(close)
+                lClaw.setPosition(1.00); //(close)
+            }
+        }
+        if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left){
+            clawstat = !clawstat;
+            if(clawstat){
+                rClaw.setPosition(0.65); //(open)
+            } else {
+                rClaw.setPosition(1.00); //(close)
             }
         }
     }
@@ -79,10 +81,10 @@ public class ServoCore {
         if(currentGamepad2.a && !previousGamepad2.a){
             clawstat = !clawstat;
             if(clawstat){
-                lClaw.setPosition(0.8); //(open)
-                rClaw.setPosition(0.8); //(open)
+                lClaw.setPosition(0.65); //(open)
+                rClaw.setPosition(0.65); //(open)
             } else {
-                lClaw.setPosition(0.96); //(close)
+                lClaw.setPosition(1.00); //(close)
                 rClaw.setPosition(1.00); //(close)
             }
         }
