@@ -35,7 +35,7 @@ public class ArmCore {
 
     //This uses the right stick to move the arm as used in Mason S.'s op mode
     public void rStick(Gamepad gamepad2, Telemetry telemetry){
-        if (armMotor.getCurrentPosition() >= 415) armPower = ((gamepad2.right_stick_y) * reducerArm) - 0.00225;
+        if (armMotor.getCurrentPosition() >= 415) armPower = ((gamepad2.right_stick_y) * reducerArm) - 0.00450;
         else if (armMotor.getCurrentPosition() <= 414) armPower = ((gamepad2.right_stick_y) * reducerArm) + 0.00050;
         armMotor.setPower(armPower);
         telemetry.addData("ArmPos: ", armMotor.getCurrentPosition());

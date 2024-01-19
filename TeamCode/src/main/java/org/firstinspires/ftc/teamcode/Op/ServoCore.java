@@ -20,7 +20,7 @@ public class ServoCore {
     public DrivetrainCore dTrain = new DrivetrainCore();
 
     Boolean launched = false;
-    boolean clawstat;
+    boolean Lclawstat, Rclawstat;
 
     ElapsedTime time = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
 
@@ -40,27 +40,29 @@ public class ServoCore {
     //Dpad control used in Mason S.'s op mode
     public void dpadRun(){
 
-        if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up){
-            clawstat = !clawstat;
+        if (currentGamepad2.y && !previousGamepad2.y){
+            Lclawstat = !Lclawstat;
+            Rclawstat = !Rclawstat;
             lClaw.setPosition(1.00); //(close)
             rClaw.setPosition(1.00); //(close)
         }
-        if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down){
-            clawstat = !clawstat;
+        if (currentGamepad2.a && !previousGamepad2.a){
+            Lclawstat = !Lclawstat;
+            Rclawstat = !Rclawstat;
             lClaw.setPosition(0.65); //(open)
             rClaw.setPosition(0.65); //(open)
         }
-        if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right){
-            clawstat = !clawstat;
-            if(clawstat){
+        if (currentGamepad2.b && !previousGamepad2.b){
+            Lclawstat = !Lclawstat;
+            if(Lclawstat){
                 lClaw.setPosition(0.65); //(open)
             } else {
                 lClaw.setPosition(1.00); //(close)
             }
         }
-        if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left){
-            clawstat = !clawstat;
-            if(clawstat){
+        if (currentGamepad2.x && !previousGamepad2.x){
+            Rclawstat = !Rclawstat;
+            if(Rclawstat){
                 rClaw.setPosition(0.65); //(open)
             } else {
                 rClaw.setPosition(1.00); //(close)
@@ -79,8 +81,8 @@ public class ServoCore {
 
     public void toggleRun(){
         if(currentGamepad2.a && !previousGamepad2.a){
-            clawstat = !clawstat;
-            if(clawstat){
+            Lclawstat = !Lclawstat;
+            if(Lclawstat){
                 lClaw.setPosition(0.65); //(open)
                 rClaw.setPosition(0.65); //(open)
             } else {
