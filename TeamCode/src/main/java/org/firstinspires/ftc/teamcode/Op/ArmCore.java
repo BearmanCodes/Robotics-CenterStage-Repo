@@ -47,8 +47,6 @@ public class ArmCore {
         if (armMotor.getCurrentPosition() >= 415) armPower = ((gamepad2.left_stick_y) * reducerArm) - 0.00450;
         else if (armMotor.getCurrentPosition() <= 414) armPower = ((gamepad2.left_stick_y) * reducerArm) + 0.00050;
         armMotor.setPower(armPower);
-        telemetry.addData("ArmPos: ", armMotor.getCurrentPosition());
-        telemetry.update();
     }
 
     //Main extender arm function

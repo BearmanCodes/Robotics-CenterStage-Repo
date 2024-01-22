@@ -26,12 +26,7 @@ public class MasonDrive extends LinearOpMode {
             } catch (RobotCoreException e) {
                 throw new RuntimeException(e);
             }
-            if (servoCore.time.time() >= 90 && !servoCore.launched){ //Make sure you can't launch it before endgame
-                servoCore.airLaunch(telemetry);
-            }
-            if (servoCore.currentGamepad.y && !servoCore.previousGamepad.y){
-                dTrain.Flip(opModeIsActive(), telemetry);
-            }
+            servoCore.airLaunch(telemetry);
             dTrain.run(gamepad1);
             dTrain.tPully(gamepad1);
             armCore.rStick(gamepad2, telemetry);
