@@ -26,12 +26,16 @@ public class MasonDrive extends LinearOpMode {
             } catch (RobotCoreException e) {
                 throw new RuntimeException(e);
             }
-            servoCore.airLaunch(telemetry);
+
             dTrain.run(gamepad1);
             dTrain.tPully(gamepad1);
-            armCore.rStick(gamepad2, telemetry);
-            armCore.Arm(gamepad2);
+
+            armCore.rStick(gamepad2);
+            armCore.Extender(gamepad2);
+
             servoCore.dpadRun();
+            servoCore.airLaunch(telemetry);
+
             telemetry.addData("Mason is: ", "stinky");
             telemetry.update();
         }

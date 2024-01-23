@@ -11,47 +11,44 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 //This is the core arm class every single TeleOp uses to access functions pertaining to the arm
 public class ArmCore {
 
-    public DcMotorEx armMotor;
-    public DcMotorEx armMotor2; //Declare the 2 arm motors, this one is the extender
-    public double reducerArm = 0.5; //Change this depending on how much you want to reduce your arm
-    public double armPower;
-    public double armMotorPower;
-    public double armMotorReducer = 1;
+    public DcMotorEx actualArm;
+    public DcMotorEx extender; //Declare the 2 arm motors, this one is the extender
+    public double reducerActualArm = 0.5; //Change this depending on how much you want to reduce your arm
+    public double actualArmPower;
+    public double extenderArmPower;
 
     public void init(HardwareMap hwMap){
-        armMotor2 = hwMap.get(DcMotorEx.class, "Extend".toLowerCase()); //Servo for the Linear extender thing
-        armMotor = hwMap.get(DcMotorEx.class, "left".toLowerCase()); //Change the string to name in config
+        extender = hwMap.get(DcMotorEx.class, "Extend".toLowerCase()); //Servo for the Linear extender thing
+        actualArm = hwMap.get(DcMotorEx.class, "left".toLowerCase()); //Change the string to name in config
 
-        armMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        actualArm.setDirection(DcMotorSimple.Direction.REVERSE);
+        actualArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        actualArm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     //This uses the triggers to move the arm as used in Mason M.'s op mode
     public void trigger(Gamepad gamepad2){
-        armPower = ((gamepad2.right_trigger + -gamepad2.left_trigger) * reducerArm) - 0.00225; //the -0.0025 counteracts gravity
-        armMotor.setPower(armPower);
+        actualArmPower = ((gamepad2.right_trigger + -gamepad2.left_trigger) * reducerActualArm) - 0.00225; //the -0.0025 counteracts gravity
+        actualArm.setPower(actualArmPower);
     }
 
     //This uses the right stick to move the arm as used in Mason S.'s op mode
-    public void rStick(Gamepad gamepad2, Telemetry telemetry){
-        if (armMotor.getCurrentPosition() >= 415) armPower = ((gamepad2.right_stick_y) * reducerArm) - 0.00450;
-        else if (armMotor.getCurrentPosition() <= 414) armPower = ((gamepad2.right_stick_y) * reducerArm) + 0.00050;
-        armMotor.setPower(armPower);
-        telemetry.addData("ArmPos: ", armMotor.getCurrentPosition());
-        telemetry.update();
+    public void rStick(Gamepad gamepad2){
+        if (actualArm.getCurrentPosition() >= 415) actualArmPower = ((gamepad2.right_stick_y) * reducerActualArm) - 0.00450;
+        else if (actualArm.getCurrentPosition() <= 414) actualArmPower = ((gamepad2.right_stick_y) * reducerActualArm) + 0.00050;
+        actualArm.setPower(actualArmPower);
     }
 
     //This uses the left stick to move the arm as used in Joel's op mode
     public void lStick(Gamepad gamepad2, Telemetry telemetry){
-        if (armMotor.getCurrentPosition() >= 415) armPower = ((gamepad2.left_stick_y) * reducerArm) - 0.00450;
-        else if (armMotor.getCurrentPosition() <= 414) armPower = ((gamepad2.left_stick_y) * reducerArm) + 0.00050;
-        armMotor.setPower(armPower);
+        if (actualArm.getCurrentPosition() >= 415) actualArmPower = ((gamepad2.left_stick_y) * reducerActualArm) - 0.00450;
+        else if (actualArm.getCurrentPosition() <= 414) actualArmPower = ((gamepad2.left_stick_y) * reducerActualArm) + 0.00050;
+        actualArm.setPower(actualArmPower);
     }
 
     //Main extender arm function
-    public void Arm(Gamepad gamepad2){
-        armMotorPower = (gamepad2.left_trigger + -gamepad2.right_trigger) * armMotorReducer;
-        armMotor2.setPower(armMotorPower);
+    public void Extender(Gamepad gamepad2){
+        extenderArmPower = (gamepad2.left_trigger + -gamepad2.right_trigger);
+        extender.setPower(extenderArmPower);
     }
 }
