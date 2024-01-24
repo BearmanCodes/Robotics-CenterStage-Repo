@@ -14,7 +14,7 @@ public class ServoAutoCore {
         rClaw.setDirection(Servo.Direction.REVERSE);
         lClaw.setDirection(Servo.Direction.FORWARD);
 
-        rClaw.setPosition(0.10);
-        lClaw.setPosition(0.13);
+        lClaw.setPosition(1.00); //(close)
+        rClaw.setPosition(1.00); //(close)
     }
 }

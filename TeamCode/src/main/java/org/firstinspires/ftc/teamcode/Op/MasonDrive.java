@@ -33,7 +33,7 @@ public class MasonDrive extends LinearOpMode {
             armCore.rStick(gamepad2);
             armCore.Extender(gamepad2);
 
-            servoCore.dpadRun();
+            servoCore.dpadRun(servoCore.currentGamepad2, servoCore.previousGamepad2);
             servoCore.airLaunch(telemetry);
 
             telemetry.addData("Mason is: ", "stinky");

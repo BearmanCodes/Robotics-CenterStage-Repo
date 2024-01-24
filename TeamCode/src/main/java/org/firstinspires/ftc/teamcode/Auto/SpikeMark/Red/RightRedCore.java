@@ -68,10 +68,10 @@ public class RightRedCore extends LinearOpMode {
         x = tensorCore.telemetryTfod(telemetry);
         time.reset();
         double t = time.time();
-        while (x == 0 || t < 6){
+        while (x == 0 || t < 2){
             x = tensorCore.telemetryTfod(telemetry);
             t = time.time();
-            if (t >= 6){
+            if (t >= 2){
                 break;
             }
             telemetry.addData("time", t);
@@ -115,7 +115,7 @@ public class RightRedCore extends LinearOpMode {
         driveAutoCore.fwdDrive(750, 24.25, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
         driveAutoCore.turnAmount(90, opModeIsActive()); //Keep this
         driveAutoCore.fwdDrive(750, 13.5, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
-        armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
+        armAutoCore.move(1000, 1350, opModeIsActive(), 250); //Keep this
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
         servoAutoCore.lClaw.setPosition(0.23);  //Keep this
         sleep(150); //Keep this
@@ -127,17 +127,18 @@ public class RightRedCore extends LinearOpMode {
     }
 
     public void RightGo() throws InterruptedException{
-        driveAutoCore.strafeRight(750, 6, opModeIsActive(), 15);
-        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12);
-        armAutoCore.move(500, 1350, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
-        servoAutoCore.lClaw.setPosition(0.23);
+        driveAutoCore.fwdDrive(750, 10.5, opModeIsActive(), 15);
+        driveAutoCore.strafeRight(750, 14.5, opModeIsActive(), 12);
+        armAutoCore.move(450, 970, opModeIsActive(), 250);
+        servoAutoCore.rClaw.setPosition(0.65);  //open slightly
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
+        driveAutoCore.turnAmount(-90, opModeIsActive());
+        driveAutoCore.strafeRight(750, 2.5, opModeIsActive(), 5);
+        driveAutoCore.fwdDrive(750, 20.85, opModeIsActive(), 10);
+        driveAutoCore.strafeLeft(750, 9.5 + 2.5, opModeIsActive(), 10);
+        armAutoCore.move(350, 705, opModeIsActive(), 100);
+        servoAutoCore.lClaw.setPosition(0.65);
         sleep(150);
-        armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 13, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.strafeRight(2000, 36, opModeIsActive(), 12); //This is 42 - whatever we strafed right
-        servoAutoCore.lClaw.setPosition(0.8); //(open)
-        servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
     public void MiddleGo() throws InterruptedException{

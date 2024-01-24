@@ -33,10 +33,18 @@ public class Keep extends LinearOpMode {
                 throw new RuntimeException(e);
             }
 
+            //arm down 979
+            //drive forward 10.5
+            // strafe right 14.5-7
+            //arm 705
+            //20.85 forward
+            //strafe left 9.5
+
             driveDpad();
             armCore.rStick(gamepad1);
+            servoCore.dpadRun(servoCore.currentGamepad, servoCore.previousGamepad);
 
-            if (servoCore.currentGamepad.a && !servoCore.previousGamepad.a){
+            if (servoCore.currentGamepad.start && !servoCore.previousGamepad.start){
                 telemetry.addData("Drive Pos: ", dTrain.frontleft.getCurrentPosition() / TicksPerIn);
                 telemetry.addData("Arm Pos: ", armCore.actualArm.getCurrentPosition());
                 telemetry.update();
@@ -48,23 +56,23 @@ public class Keep extends LinearOpMode {
     }
 
     public void driveDpad(){
-        if(servoCore.currentGamepad.dpad_left && !servoCore.previousGamepad.dpad_left){
+        if(gamepad1.dpad_left){
             dTrain.setMotorPower(-mPower, mPower, mPower, -mPower);
-        } else if (servoCore.currentGamepad.dpad_right && !servoCore.previousGamepad.dpad_right){
+        } else if (gamepad1.dpad_right){
             dTrain.setMotorPower(mPower, -mPower, -mPower, mPower);
-        } else if (servoCore.currentGamepad.dpad_up && !servoCore.previousGamepad.dpad_up){
+        } else if (gamepad1.dpad_up){
             dTrain.setMotorPower(mPower, mPower, mPower, mPower);
-        } else if (servoCore.currentGamepad.dpad_down && !servoCore.previousGamepad.dpad_down){
+        } else if (gamepad1.dpad_down){
             dTrain.setMotorPower(-mPower, -mPower, -mPower, -mPower);
         } else {
             dTrain.setMotorPower(0, 0, 0, 0);
         }
 
-        if (servoCore.currentGamepad.x && ! servoCore.previousGamepad.x){
+        if (servoCore.currentGamepad.right_bumper && ! servoCore.previousGamepad.right_bumper){
             dAuto.turnAmount(90, opModeIsActive());
         }
 
-        if (servoCore.currentGamepad.y && ! servoCore.previousGamepad.y){
+        if (servoCore.currentGamepad.left_bumper && ! servoCore.previousGamepad.left_bumper){
             dAuto.turnAmount(-90, opModeIsActive());
         }
     }
@@ -72,5 +80,6 @@ public class Keep extends LinearOpMode {
     private void Init(){
         dTrain.init(hardwareMap);
         armCore.init(hardwareMap);
+        servoCore.init(hardwareMap);
     }
 }

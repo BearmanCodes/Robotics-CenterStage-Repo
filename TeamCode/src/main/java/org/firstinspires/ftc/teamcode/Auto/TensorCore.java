@@ -120,47 +120,47 @@ public class TensorCore {
     public String getPos(String color, double x){
         if (color.equalsIgnoreCase("rred")){ //Positions change based on every field and color
                                                         //variation so I need TWELVE if statements (more efficient way maybe?)
-            if (x >= (30 - 50) && x <= (30 + 50)){
+            if (x >= (135 - 50) && x <= (135 + 50)){
                 return "left";
             }
-            if (x >= (280 - 50) && x <= (280 + 50)){
+            if (x >= (340 - 50) && x <= (340 + 50)){
                 return "middle";
             }
-            if (x >= (515 - 50) && x <= (515 + 50)){
+            if (x >= (550 - 50) && x <= (550 + 50)){
                 return "right";
             }
             //-50 and +50 tolerances for positions
         }
         if (color.equalsIgnoreCase("lred")){
-            if (x >= (190 - 50) && x <= (190 + 50)){
+            if (x >= (85 - 50) && x <= (85 + 50)){
                 return "left";
             }
-            if (x >= (440 - 50) && x <= (440 + 50)){
+            if (x >= (310 - 50) && x <= (310 + 50)){
                 return "middle";
             }
-            else {
+            if (x >= (515 - 50) && x <= (515 + 50)) {
                 return "right";
             }
         }
         if (color.equalsIgnoreCase("lblue")){
-            if (x >= (205 - 50) && x <= (205 + 50)){
+            if (x >= (55 - 50) && x <= (55 + 50)){
                 return "left";
             }
-            if (x >= (430 - 50) && x <= (430 + 50)){
+            if (x >= (285 - 50) && x <= (285 + 50)){
                 return "middle";
             }
-            else {
+            if (x >= (495 - 50) && x <= (495 + 50)) {
                 return "right";
             }
         }
         if (color.equalsIgnoreCase("rblue")){
-            if (x >= (30 - 50) && x <= (30 + 50)){
+            if (x >= (155 - 50) && x <= (155 + 50)){
                 return "left";
             }
-            if (x >= (300 - 50) && x <= (300 + 50)){
+            if (x >= (360 - 50) && x <= (360 + 50)){
                 return "middle";
             }
-            if (x >= (525 - 50) && x <= (525 + 50)){
+            if (x >= (565 - 50) && x <= (565 + 50)){
                 return "right";
             }
         }
