@@ -40,6 +40,12 @@ public class Keep extends LinearOpMode {
             //20.85 forward
             //strafe left 9.5
 
+            //21 inches forward
+            //9.6 inches strafe right
+            //2 inches strafe left
+            //20.85 + 6.9 to go to backboard
+
+
             driveDpad();
             armCore.rStick(gamepad1);
             servoCore.dpadRun(servoCore.currentGamepad, servoCore.previousGamepad);
