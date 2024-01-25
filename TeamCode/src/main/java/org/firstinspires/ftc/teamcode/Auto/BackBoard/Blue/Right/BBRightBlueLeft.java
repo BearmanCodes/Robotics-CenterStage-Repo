@@ -57,7 +57,7 @@ public class BBRightBlueLeft extends LinearOpMode {
 
         driveAutoCore.strafeRight(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
         driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
-        driveAutoCore.turnAmount(90, opModeIsActive()); //Keep this
+        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry); //Keep this
         driveAutoCore.fwdDrive(750, 15, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
         armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this

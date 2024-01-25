@@ -75,11 +75,11 @@ public class Keep extends LinearOpMode {
         }
 
         if (servoCore.currentGamepad.right_bumper && ! servoCore.previousGamepad.right_bumper){
-            dAuto.turnAmount(90, opModeIsActive());
+            dAuto.turnAmount(90, opModeIsActive(), telemetry);
         }
 
         if (servoCore.currentGamepad.left_bumper && ! servoCore.previousGamepad.left_bumper){
-            dAuto.turnAmount(-90, opModeIsActive());
+            dAuto.turnAmount(-90, opModeIsActive(), telemetry);
         }
     }
 

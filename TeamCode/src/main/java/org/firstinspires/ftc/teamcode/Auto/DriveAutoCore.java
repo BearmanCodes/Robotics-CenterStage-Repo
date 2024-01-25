@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
@@ -15,7 +16,7 @@ public class DriveAutoCore {
     public DcMotorEx frontLeft, frontRight, backLeft, backRight;
 
     YawPitchRollAngles robotOrientation;
-    IMU imu;
+    public IMU imu;
     IMU.Parameters imuparams;
 
     static final double TicksPerRev = 560;
@@ -164,7 +165,7 @@ public class DriveAutoCore {
         Drive(vel, inches, -inches, inches, -inches, active, tOut);
     }
 
-    public void turnAmount(int target, boolean active) {
+    public void turnAmount(int target, boolean active, Telemetry telemetry) {
         if (active) {
             robotOrientation = imu.getRobotYawPitchRollAngles();
             double Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
@@ -174,17 +175,34 @@ public class DriveAutoCore {
                         setMotorVelocity(600, -600, 600, -600);
                         robotOrientation = imu.getRobotYawPitchRollAngles();
                         Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                        telemetry.addData("Yaw: ", Yaw);
+                        telemetry.addData("Target: ", target);
+                        telemetry.update();
                     }
+                    telemetry.addData("Yaw: ", Yaw);
+                    telemetry.addData("Target: ", target);
+                    telemetry.update();
                     allMotorVelocity(0);
+                    telemetry.addData("Yaw: ", Yaw);
+                    telemetry.addData("Target: ", target);
+                    telemetry.update();
                     if (Yaw < target) {
                         robotOrientation = imu.getRobotYawPitchRollAngles();
                         Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                         double error = Yaw - target;
+                        telemetry.addData("Yaw: ", Yaw);
+                        telemetry.addData("Target: ", target);
+                        telemetry.addData("Error: ", error);
+                        telemetry.update();
                         while (Math.abs(error) > 0.2) {
                             setMotorVelocity(-600, 600, -600, 600);
                             robotOrientation = imu.getRobotYawPitchRollAngles();
                             Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                             error = Yaw - target;
+                            telemetry.addData("Yaw: ", Yaw);
+                            telemetry.addData("Target: ", target);
+                            telemetry.addData("Error: ", error);
+                            telemetry.update();
                         }
                         allMotorVelocity(0);
                     }
@@ -194,19 +212,44 @@ public class DriveAutoCore {
                         setMotorVelocity(-600, 600, -600, 600);
                         robotOrientation = imu.getRobotYawPitchRollAngles();
                         Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
+                        telemetry.addData("Yaw: ", Yaw);
+                        telemetry.addData("Target: ", target);
+                        telemetry.update();
                     }
+                    telemetry.addData("Yaw: ", Yaw);
+                    telemetry.addData("Target: ", target);
+                    telemetry.update();
                     allMotorVelocity(0);
+                    telemetry.addData("Yaw: ", Yaw);
+                    telemetry.addData("Target: ", target);
+                    telemetry.update();
                     if (Yaw > target) {
                         robotOrientation = imu.getRobotYawPitchRollAngles();
                         Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                         double error = Yaw - target;
+                        telemetry.addData("Yaw: ", Yaw);
+                        telemetry.addData("Target: ", target);
+                        telemetry.addData("Error: ", error);
+                        telemetry.update();
                         while (Math.abs(error) > 0.2) {
                             setMotorVelocity(600, -600, 600, -600);
                             robotOrientation = imu.getRobotYawPitchRollAngles();
                             Yaw = robotOrientation.getYaw(AngleUnit.DEGREES);
                             error = Yaw - target;
+                            telemetry.addData("Yaw: ", Yaw);
+                            telemetry.addData("Target: ", target);
+                            telemetry.addData("Error: ", error);
+                            telemetry.update();
                         }
+                        telemetry.addData("Yaw: ", Yaw);
+                        telemetry.addData("Target: ", target);
+                        telemetry.addData("Error: ", error);
+                        telemetry.update();
                         allMotorVelocity(0);
+                        telemetry.addData("Yaw: ", Yaw);
+                        telemetry.addData("Target: ", target);
+                        telemetry.addData("Error: ", error);
+                        telemetry.update();
                     }
                 }
             }

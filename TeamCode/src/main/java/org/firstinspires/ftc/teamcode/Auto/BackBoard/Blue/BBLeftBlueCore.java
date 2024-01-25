@@ -120,7 +120,7 @@ public class BBLeftBlueCore extends LinearOpMode {
 
     public void LeftGo() throws InterruptedException {
         driveAutoCore.fwdDrive(750, 30, opModeIsActive(), 12); //However much to line up left side of backboard
-        driveAutoCore.turnAmount(-90, opModeIsActive()); //Face backboard
+        driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry); //Face backboard
         driveAutoCore.fwdDrive(500, 36, opModeIsActive(), 500); //Drive so arm reach
         armAutoCore.move(500, 750, opModeIsActive(), 250); //Move arm however amount ticks
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
@@ -133,7 +133,7 @@ public class BBLeftBlueCore extends LinearOpMode {
 
     public void RightGo() throws InterruptedException{
         driveAutoCore.fwdDrive(750, 35, opModeIsActive(), 12); //However much to line up right side of backboard
-        driveAutoCore.turnAmount(-90, opModeIsActive()); //Face backboard
+        driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry); //Face backboard
         driveAutoCore.fwdDrive(500, 36, opModeIsActive(), 500); //Drive so arm reach
         armAutoCore.move(500, 750, opModeIsActive(), 250); //Move arm however amount ticks
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly
@@ -146,7 +146,7 @@ public class BBLeftBlueCore extends LinearOpMode {
 
     public void MiddleGo() throws InterruptedException{
         driveAutoCore.fwdDrive(750, 32.5, opModeIsActive(), 12); //However much to line up middle side of backboard
-        driveAutoCore.turnAmount(-90, opModeIsActive()); //Face backboard
+        driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry); //Face backboard
         driveAutoCore.fwdDrive(500, 36, opModeIsActive(), 500); //Drive so arm reach
         armAutoCore.move(500, 750, opModeIsActive(), 250); //Move arm however amount ticks
         servoAutoCore.rClaw.setPosition(0.20);  //open slightly

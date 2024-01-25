@@ -36,7 +36,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
-@Disabled
+
 @Autonomous(name="RightRedLeft", group="RightRed")
 public class RightRedLeft extends LinearOpMode {
 
@@ -51,23 +51,16 @@ public class RightRedLeft extends LinearOpMode {
         initialize();
 
         waitForStart();
-
-        //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        sleep(250);
-
-        driveAutoCore.strafeRight(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
-        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
-        driveAutoCore.turnAmount(90, opModeIsActive()); //Keep this
-        driveAutoCore.fwdDrive(750, 15, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
-        armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
-        servoAutoCore.lClaw.setPosition(0.23);  //Keep this
-        sleep(150); //Keep this
-        armAutoCore.move(500, 150, opModeIsActive(), 250); //Keep this
-        driveAutoCore.strafeLeft(750, 23, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.revDrive(2000, 40, opModeIsActive(), 12); //This is 42 - whatever we strafed right (deviated from original)
-        servoAutoCore.lClaw.setPosition(0.8); //(open)
-        servoAutoCore.rClaw.setPosition(0.8); //(open)
+        driveAutoCore.imu.resetYaw();
+        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 15);
+        driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
+        armAutoCore.move(450, 970, opModeIsActive(), 250);
+        servoAutoCore.rClaw.setPosition(0.65);  //open slightly
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
+        //37.5 toward outside
+        //32.5 toward backboard
+        //arm 714 ticks
     }
 
     private void initialize() {
