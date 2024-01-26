@@ -68,13 +68,13 @@ public class LeftBlueCore extends LinearOpMode {
         x = tensorCore.telemetryTfod(telemetry);
         time.reset();
         double t = time.time();
-        while (x == 0 || t < 6){
+        while (x == 0){
             x = tensorCore.telemetryTfod(telemetry);
-            t = time.time();
-            if (t >= 6){
-                break;
-            }
-            telemetry.addData("time", t);
+            //t = time.time();
+            //if (t >= 7){
+              //  break;
+            //}
+            //telemetry.addData("time", t);
             telemetry.addData("x", x);
             telemetry.update();
         }
@@ -117,46 +117,57 @@ public class LeftBlueCore extends LinearOpMode {
     }//Decides which auto function to execute depending on what tensorflow returns
 
     public void LeftGo() throws InterruptedException {
-        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 15); //Wherever to line up with left tape
-        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //However much to line up arm
-        armAutoCore.move(500, 1350, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
-        servoAutoCore.lClaw.setPosition(0.23);
+        driveAutoCore.imu.resetYaw();
+        driveAutoCore.fwdDrive(750, 10, opModeIsActive(), 15);
+        driveAutoCore.strafeLeft(750, 14, opModeIsActive(), 12);
+        armAutoCore.move(450, 970, opModeIsActive(), 250);
+        servoAutoCore.lClaw.setPosition(0.65);  //open slightly
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
+        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
+        driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 5);
+        driveAutoCore.fwdDrive(750, 20.85, opModeIsActive(), 10);
+        /*Not confident on this */ driveAutoCore.strafeRight(750, 9.5 + 2.5, opModeIsActive(), 10);
+        armAutoCore.move(350, 705, opModeIsActive(), 1000);
+        servoAutoCore.rClaw.setPosition(0.65);
+        sleep(1000);
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
         sleep(150);
-        armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 13, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.strafeLeft(2000, 36, opModeIsActive(), 12); //This is 42 - whatever we strafed left
-        servoAutoCore.lClaw.setPosition(0.8); //(open)
-        servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
     public void RightGo() throws InterruptedException{
-        driveAutoCore.strafeLeft(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
-        driveAutoCore.fwdDrive(750, 24.25, opModeIsActive(), 12); //Change this to how far we need to be to line up with right tape once turned
-        driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry); //Keep this
-        driveAutoCore.fwdDrive(750, 13.5, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach right tape
-        armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
-        servoAutoCore.lClaw.setPosition(0.23);  //Keep this
-        sleep(150); //Keep this
-        armAutoCore.move(500, 150, opModeIsActive(), 250); //Keep this
-        driveAutoCore.strafeRight(750, 22, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.revDrive(2000, 34, opModeIsActive(), 12); //This is 42 - whatever we strafed right (deviated from original)
-        servoAutoCore.lClaw.setPosition(0.8); //(open)
-        servoAutoCore.rClaw.setPosition(0.8); //(open)
+        driveAutoCore.imu.resetYaw();
+        //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
+        driveAutoCore.strafeLeft(750, 5, opModeIsActive(), 0);
+        driveAutoCore.fwdDrive(750, 12, opModeIsActive(), 500);
+        driveAutoCore.turnAmount(-45, opModeIsActive(), telemetry);
+        driveAutoCore.fwdDrive(750, 4, opModeIsActive(), 0);
+        armAutoCore.move(450, 970, opModeIsActive(), 0);
+        servoAutoCore.lClaw.setPosition(0.65);  //open slightly
+        armAutoCore.move(450, 15, opModeIsActive(), 500);
+        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
+        driveAutoCore.fwdDrive(750, 32.5, opModeIsActive(), 0);
+        driveAutoCore.strafeRight(750, 37.5 - 16, opModeIsActive(), 0);
+        armAutoCore.move(350, 705, opModeIsActive(), 0);
+        servoAutoCore.rClaw.setPosition(0.65);
+        armAutoCore.move(450, 15, opModeIsActive(), 0);
     }
 
     public void MiddleGo() throws InterruptedException{
-        driveAutoCore.fwdDrive(750, 19, opModeIsActive(), 12);
-        armAutoCore.move(500, 1350, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
-        servoAutoCore.lClaw.setPosition(0.23);
+        driveAutoCore.imu.resetYaw();
+        driveAutoCore.fwdDrive(750, 21, opModeIsActive(), 15);
+        driveAutoCore.strafeLeft(750, 7.5, opModeIsActive(), 12);
+        armAutoCore.move(450, 970, opModeIsActive(), 250);
+        servoAutoCore.lClaw.setPosition(0.65);  //open slightly
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
+        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
+        driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 5);
+        driveAutoCore.fwdDrive(750, 35.35 - 7.5, opModeIsActive(), 10);
+        driveAutoCore.strafeRight(750, 8.5 + 2.5, opModeIsActive(), 10);
+        armAutoCore.move(350, 705, opModeIsActive(), 100);
+        servoAutoCore.rClaw.setPosition(0.65);
+        sleep(750);
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
         sleep(150);
-        armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 17, opModeIsActive(), 12);
-        driveAutoCore.strafeLeft(2000, 42, opModeIsActive(), 12);
-        servoAutoCore.lClaw.setPosition(0.8); //(open)
-        servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
     //The auto functions depending on whether it's spike mark center, left, or middle are above
