@@ -68,13 +68,13 @@ public class RightBlueCore extends LinearOpMode {
         x = tensorCore.telemetryTfod(telemetry);
         time.reset();
         double t = time.time();
-        while (x == 0 || t < 6){
+        while (x == 0){
             x = tensorCore.telemetryTfod(telemetry);
-            t = time.time();
-            if (t >= 6){
-                break;
-            }
-            telemetry.addData("time", t);
+            //t = time.time();
+            //if (t >= 7){
+            //  break;
+            //}
+            //telemetry.addData("time", t);
             telemetry.addData("x", x);
             telemetry.update();
         }
@@ -115,39 +115,30 @@ public class RightBlueCore extends LinearOpMode {
     }
 
     public void LeftGo() throws InterruptedException {
-        driveAutoCore.strafeRight(750, 15, opModeIsActive(), 15); //Change this to how far we need to strafe away
-        driveAutoCore.fwdDrive(750, 28.5, opModeIsActive(), 12); //Change this to how far we need to be to line up with left tape once turned
-        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry); //Keep this
-        driveAutoCore.fwdDrive(750, 10.5, opModeIsActive(), 12); //Change this to how far we need to go for arm to reach left tape
-        armAutoCore.move(500, 1350, opModeIsActive(), 250); //Keep this
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //Keep this
-        servoAutoCore.lClaw.setPosition(0.23);  //Keep this
-        sleep(150); //Keep this
-        armAutoCore.move(500, 150, opModeIsActive(), 250); //Keep this
-        servoAutoCore.lClaw.setPosition(0.8); //(open)
-        servoAutoCore.rClaw.setPosition(0.8); //(open)
+        driveAutoCore.imu.resetYaw();
+        driveAutoCore.strafeRight(750, 6, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 15);
+        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
+        armAutoCore.move(450, 970, opModeIsActive(), 250);
+        servoAutoCore.rClaw.setPosition(0.65);  //open slightly
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
     }
 
     public void RightGo() throws InterruptedException{
-        driveAutoCore.strafeRight(750, 6, opModeIsActive(), 15); //change this to line up with right tape
-        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12); //change this to where arm reaches
-        armAutoCore.move(500, 1350, opModeIsActive(), 250); //keep this
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly //keep this
-        servoAutoCore.lClaw.setPosition(0.23);  //keep this
-        sleep(150); //keep this
-        armAutoCore.move(500, 150, opModeIsActive(), 250); //keep this
-        servoAutoCore.lClaw.setPosition(0.8); //(open)
-        servoAutoCore.rClaw.setPosition(0.8); //(open)
+        driveAutoCore.strafeRight(750, 13.5, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 11.4, opModeIsActive(), 15);
+        armAutoCore.move(450, 970, opModeIsActive(), 250);
+        servoAutoCore.rClaw.setPosition(0.65);  //open slightly
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
     }
 
     public void MiddleGo() throws InterruptedException{
-        driveAutoCore.fwdDrive(750, 19, opModeIsActive(), 12);
-        armAutoCore.move(500, 1350, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
-        servoAutoCore.lClaw.setPosition(0.23);
-        sleep(150);
-        armAutoCore.move(500, 150, opModeIsActive(), 250);
-        servoAutoCore.lClaw.setPosition(0.8); //(open)
-        servoAutoCore.rClaw.setPosition(0.8); //(open)
+        driveAutoCore.imu.resetYaw();
+        driveAutoCore.strafeRight(750, 2.5, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 45, opModeIsActive(), 15);
+        driveAutoCore.revDrive(750, 23, opModeIsActive(), 23);
+        armAutoCore.move(450, 970, opModeIsActive(), 250);
+        servoAutoCore.rClaw.setPosition(0.65);  //open slightly
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
     }
 }
