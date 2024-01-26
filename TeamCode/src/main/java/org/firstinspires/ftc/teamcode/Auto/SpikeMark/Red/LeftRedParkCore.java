@@ -27,7 +27,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Auto.SpikeMark.Blue;
+package org.firstinspires.ftc.teamcode.Auto.SpikeMark.Red;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -39,11 +39,11 @@ import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.TensorCore;
 
 //COMPLETE
-@Autonomous(name="LeftBlue", group="Blue") //Autonomous for left of the blue side
-public class LeftBlueCore extends LinearOpMode {
-    private static final String TFOD_MODEL_ASSET = "Blue.tflite";
+@Autonomous(name="PARKPARKLeftRed", group="Red")
+public class LeftRedParkCore extends LinearOpMode {
+    private static final String TFOD_MODEL_ASSET = "Red.tflite";
     private static final String[] LABELS = {
-            "Blue",
+            "Red",
     };
 
     DriveAutoCore driveAutoCore = new DriveAutoCore();
@@ -72,22 +72,17 @@ public class LeftBlueCore extends LinearOpMode {
             x = tensorCore.telemetryTfod(telemetry);
             //t = time.time();
             //if (t >= 7){
-              //  break;
+            //  break;
             //}
             //telemetry.addData("time", t);
             telemetry.addData("x", x);
             telemetry.update();
         }
         x = tensorCore.telemetryTfod(telemetry);
-        pos = tensorCore.getPos("lblue", x);
+        pos = tensorCore.getPos("lred", x);
         tensorCore.visionPortal.close();
         telemetry.addData("Pos: ", x);
         telemetry.update();
-
-        /*The code above is quite possibly the stupidest code I have ever written
-        x should be equal to whatever tensorflow returns when it detects the object and its position
-        HOWEVER, because the camera can't see one side, wait 6 seconds and if detcts nothing just
-        say it's that side, like I said, so stupid but it works, please make this better I BEG*/
 
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(150);
@@ -100,7 +95,6 @@ public class LeftBlueCore extends LinearOpMode {
         armAutoCore.init(hardwareMap);
         servoAutoCore.init(hardwareMap);
         tensorCore.initTfod(hardwareMap, LABELS, TFOD_MODEL_ASSET);
-
     }
 
     public void decide(String position) throws InterruptedException {
@@ -114,61 +108,39 @@ public class LeftBlueCore extends LinearOpMode {
             case "middle":
                 MiddleGo();
         }
-    }//Decides which auto function to execute depending on what tensorflow returns
+    }
 
     public void LeftGo() throws InterruptedException {
-        driveAutoCore.imu.resetYaw();
-        driveAutoCore.fwdDrive(750, 10, opModeIsActive(), 15);
-        driveAutoCore.strafeLeft(750, 14, opModeIsActive(), 12);
+        driveAutoCore.strafeLeft(750, 13.5, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 11.4, opModeIsActive(), 15);
         armAutoCore.move(450, 970, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
         armAutoCore.move(450, 15, opModeIsActive(), 250);
-        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
-        driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 5);
-        driveAutoCore.fwdDrive(750, 20.85, opModeIsActive(), 10);
-        /*Not confident on this */ driveAutoCore.strafeRight(750, 9.5 + 2.5, opModeIsActive(), 10);
-        armAutoCore.move(350, 705, opModeIsActive(), 1000);
-        servoAutoCore.lClaw.setPosition(0.65);
-        sleep(1000);
-        armAutoCore.move(450, 15, opModeIsActive(), 250);
-        sleep(150);
+        driveAutoCore.revDrive(750, 10.2, opModeIsActive(), 10);
+        driveAutoCore.strafeRight(2000, 120 + 13.5, opModeIsActive(), 0);
     }
 
     public void RightGo() throws InterruptedException{
         driveAutoCore.imu.resetYaw();
-        //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        driveAutoCore.strafeLeft(750, 5, opModeIsActive(), 0);
-        driveAutoCore.fwdDrive(750, 12, opModeIsActive(), 500);
-        driveAutoCore.turnAmount(-45, opModeIsActive(), telemetry);
-        driveAutoCore.fwdDrive(750, 4, opModeIsActive(), 0);
-        armAutoCore.move(450, 970, opModeIsActive(), 0);
+        driveAutoCore.strafeLeft(750, 7, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 15);
+        driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
+        armAutoCore.move(450, 970, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
-        armAutoCore.move(450, 15, opModeIsActive(), 500);
-        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
-        driveAutoCore.fwdDrive(750, 32.5, opModeIsActive(), 0);
-        driveAutoCore.strafeRight(750, 37.5 - 16, opModeIsActive(), 0);
-        armAutoCore.move(350, 705, opModeIsActive(), 0);
-        servoAutoCore.lClaw.setPosition(0.65);
-        armAutoCore.move(450, 15, opModeIsActive(), 0);
+        armAutoCore.move(450, 15, opModeIsActive(), 250);
     }
 
     public void MiddleGo() throws InterruptedException{
         driveAutoCore.imu.resetYaw();
-        driveAutoCore.fwdDrive(750, 21, opModeIsActive(), 15);
-        driveAutoCore.strafeLeft(750, 7.5, opModeIsActive(), 12);
+        driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 45, opModeIsActive(), 15);
+        driveAutoCore.revDrive(750, 23, opModeIsActive(), 23);
         armAutoCore.move(450, 970, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
         armAutoCore.move(450, 15, opModeIsActive(), 250);
-        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
-        driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 5);
-        driveAutoCore.fwdDrive(750, 35.35 - 7.5, opModeIsActive(), 10);
-        driveAutoCore.strafeRight(750, 8.5 + 2.5, opModeIsActive(), 10);
-        armAutoCore.move(350, 705, opModeIsActive(), 100);
-        servoAutoCore.lClaw.setPosition(0.65);
-        sleep(750);
-        armAutoCore.move(450, 15, opModeIsActive(), 250);
-        sleep(150);
     }
 
-    //The auto functions depending on whether it's spike mark center, left, or middle are above
+    //Middle around 442x
+    //Left around 193x
+    //Right not in camera view as of now
 }

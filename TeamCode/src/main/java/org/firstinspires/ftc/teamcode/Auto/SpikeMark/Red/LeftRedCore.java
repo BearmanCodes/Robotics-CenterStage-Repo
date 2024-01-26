@@ -121,7 +121,7 @@ public class LeftRedCore extends LinearOpMode {
 
     public void RightGo() throws InterruptedException{
         driveAutoCore.imu.resetYaw();
-        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 12);
+        driveAutoCore.strafeLeft(750, 7, opModeIsActive(), 12);
         driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 15);
         driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
         armAutoCore.move(450, 970, opModeIsActive(), 250);

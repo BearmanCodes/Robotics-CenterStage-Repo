@@ -73,7 +73,7 @@ public class ServoCore {
 
     public void airLaunch(Telemetry telemetry){
         if (currentGamepad.x && !previousGamepad.x){
-            airplane.setPosition(0.55);
+            airplane.setPosition(0.75);
             launched = true;
         }
     }

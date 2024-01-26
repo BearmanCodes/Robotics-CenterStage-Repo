@@ -156,7 +156,7 @@ public class RightRedCore extends LinearOpMode {
         driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
         driveAutoCore.strafeRight(750, 2.5, opModeIsActive(), 5);
         driveAutoCore.fwdDrive(750, 35.35 - 7.5, opModeIsActive(), 10);
-        driveAutoCore.strafeLeft(750, 8.5 + 2.5, opModeIsActive(), 10);
+        driveAutoCore.strafeLeft(750, 8.5 + 2, opModeIsActive(), 10);
         armAutoCore.move(350, 705, opModeIsActive(), 100);
         servoAutoCore.lClaw.setPosition(0.65);
         sleep(750);
