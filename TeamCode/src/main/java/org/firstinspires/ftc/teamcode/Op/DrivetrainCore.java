@@ -19,8 +19,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 public class DrivetrainCore{
 
     public DcMotorEx frontleft, frontright, backleft, backright, tetrix; //Declare the drivetrian motors
-
-    public double reducer = 1; //Change for reducing drive power
+    public double reducer = /*0.85*/1; //Change for reducing drive power
 
     YawPitchRollAngles robotOrientation; //IMU YPR Angles
 

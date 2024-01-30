@@ -13,7 +13,7 @@ public class ArmCore {
 
     public DcMotorEx actualArm;
     public DcMotorEx extender; //Declare the 2 arm motors, this one is the extender
-    public double reducerActualArm = 0.5; //Change this depending on how much you want to reduce your arm
+    public double reducerActualArm = /*0.4*/1; //Change this depending on how much you want to reduce your arm
     public double actualArmPower;
     public double extenderArmPower;
 

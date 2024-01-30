@@ -33,8 +33,8 @@ public class ServoCore {
         airplane.setDirection(Servo.Direction.REVERSE);
         rClaw.setDirection(Servo.Direction.REVERSE);
 
-        lClaw.setPosition(1.00); //(close)
-        rClaw.setPosition(1.00); //(close)
+        lClaw.setPosition(0.89); //(close)
+        rClaw.setPosition(0.93); //(close)
         airplane.setPosition(0.36);
     }
 
@@ -44,8 +44,8 @@ public class ServoCore {
         if (currentGamepad2.y && !previousGamepad2.y){
             Lclawstat = !Lclawstat;
             Rclawstat = !Rclawstat;
-            lClaw.setPosition(1.00); //(close)
-            rClaw.setPosition(1.00); //(close)
+            lClaw.setPosition(0.89); //(close)
+            rClaw.setPosition(0.93); //(close)
         }
         if (currentGamepad2.a && !previousGamepad2.a){
             Lclawstat = !Lclawstat;
@@ -58,7 +58,7 @@ public class ServoCore {
             if(Lclawstat){
                 lClaw.setPosition(0.65); //(open)
             } else {
-                lClaw.setPosition(1.00); //(close)
+                lClaw.setPosition(0.89); //(close)
             }
         }
         if (currentGamepad2.x && !previousGamepad2.x){
@@ -66,7 +66,7 @@ public class ServoCore {
             if(Rclawstat){
                 rClaw.setPosition(0.65); //(open)
             } else {
-                rClaw.setPosition(1.00); //(close)
+                rClaw.setPosition(0.93); //(close)
             }
         }
     }
@@ -87,8 +87,8 @@ public class ServoCore {
                 lClaw.setPosition(0.65); //(open)
                 rClaw.setPosition(0.65); //(open)
             } else {
-                lClaw.setPosition(1.00); //(close)
-                rClaw.setPosition(1.00); //(close)
+                lClaw.setPosition(0.89); //(close)
+                rClaw.setPosition(0.93); //(close)
             }
         }
     }

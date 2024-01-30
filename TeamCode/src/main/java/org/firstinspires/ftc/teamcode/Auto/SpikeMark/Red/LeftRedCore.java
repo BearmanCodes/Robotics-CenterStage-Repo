@@ -112,10 +112,11 @@ public class LeftRedCore extends LinearOpMode {
     }
 
     public void LeftGo() throws InterruptedException {
+        driveAutoCore.imu.resetYaw();
         driveAutoCore.strafeLeft(750, 13.5, opModeIsActive(), 12);
         //driveAutoCore.fwdDrive(750, 11.4, opModeIsActive(), 15);
         driveAutoCore.fwdDrive(750, 45, opModeIsActive(), 10);
-        driveAutoCore.revDrive(750, 23, opModeIsActive(), 10);
+        driveAutoCore.revDrive(750, 33.6, opModeIsActive(), 10);
         armAutoCore.move(450, 970, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
         armAutoCore.move(450, 15, opModeIsActive(), 250);
@@ -135,7 +136,7 @@ public class LeftRedCore extends LinearOpMode {
         driveAutoCore.imu.resetYaw();
         driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 12);
         driveAutoCore.fwdDrive(750, 45, opModeIsActive(), 15);
-        driveAutoCore.revDrive(750, 23, opModeIsActive(), 23);
+        driveAutoCore.revDrive(750, 24, opModeIsActive(), 23);
         armAutoCore.move(450, 970, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
         armAutoCore.move(450, 15, opModeIsActive(), 250);

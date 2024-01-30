@@ -125,6 +125,7 @@ public class RightBlueCore extends LinearOpMode {
     }
 
     public void RightGo() throws InterruptedException{
+        driveAutoCore.imu.resetYaw();
         driveAutoCore.strafeRight(750, 14, opModeIsActive(), 12);
         //driveAutoCore.fwdDrive(750, 11.4, opModeIsActive(), 15);
         driveAutoCore.fwdDrive(750, 45, opModeIsActive(), 5);

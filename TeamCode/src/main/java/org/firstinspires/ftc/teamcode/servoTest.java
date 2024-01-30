@@ -31,8 +31,8 @@ public class servoTest extends LinearOpMode {
 
         //36 and 55 reverse
         // r servo 0.8 (open)
-        lservo.setDirection(Servo.Direction.REVERSE);
-        rservo.setDirection(Servo.Direction.FORWARD);
+        lservo.setDirection(Servo.Direction.FORWARD);
+        rservo.setDirection(Servo.Direction.REVERSE);
         waitForStart();
         while (opModeIsActive()){
             try {

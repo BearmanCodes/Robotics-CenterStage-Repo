@@ -118,15 +118,16 @@ public class LeftBlueCore extends LinearOpMode {
 
     public void LeftGo() throws InterruptedException {
         driveAutoCore.imu.resetYaw();
-        driveAutoCore.fwdDrive(750, 10, opModeIsActive(), 15);
         driveAutoCore.strafeLeft(750, 14, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 22, opModeIsActive(), 15);
+        driveAutoCore.revDrive(750, 12, opModeIsActive(), 15);
         armAutoCore.move(450, 970, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
         armAutoCore.move(450, 15, opModeIsActive(), 250);
         driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
         driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 5);
-        driveAutoCore.fwdDrive(750, 20.85, opModeIsActive(), 10);
-        /*Not confident on this */ driveAutoCore.strafeRight(750, 9.5 + 2.5, opModeIsActive(), 10);
+        driveAutoCore.fwdDrive(750, 20.85 + 1, opModeIsActive(), 10);
+        /*Not confident on this */ driveAutoCore.strafeRight(750, 2.5, opModeIsActive(), 10);
         armAutoCore.move(350, 705, opModeIsActive(), 1000);
         servoAutoCore.lClaw.setPosition(0.65);
         sleep(1000);
@@ -136,16 +137,15 @@ public class LeftBlueCore extends LinearOpMode {
 
     public void RightGo() throws InterruptedException{
         driveAutoCore.imu.resetYaw();
-        //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        driveAutoCore.strafeLeft(750, 5, opModeIsActive(), 0);
+        driveAutoCore.strafeLeft(750, 7, opModeIsActive(), 0);
         driveAutoCore.fwdDrive(750, 12, opModeIsActive(), 500);
         driveAutoCore.turnAmount(-45, opModeIsActive(), telemetry);
         driveAutoCore.fwdDrive(750, 4, opModeIsActive(), 0);
         armAutoCore.move(450, 970, opModeIsActive(), 0);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
-        armAutoCore.move(450, 15, opModeIsActive(), 500);
+        armAutoCore.move(450, 15, opModeIsActive(), 1000);
         driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
-        driveAutoCore.fwdDrive(750, 32.5, opModeIsActive(), 0);
+        driveAutoCore.fwdDrive(750, 32.5 + 1, opModeIsActive(), 0);
         driveAutoCore.strafeRight(750, 37.5 - 16, opModeIsActive(), 0);
         armAutoCore.move(350, 705, opModeIsActive(), 0);
         servoAutoCore.lClaw.setPosition(0.65);
@@ -154,15 +154,16 @@ public class LeftBlueCore extends LinearOpMode {
 
     public void MiddleGo() throws InterruptedException{
         driveAutoCore.imu.resetYaw();
-        driveAutoCore.fwdDrive(750, 21, opModeIsActive(), 15);
         driveAutoCore.strafeLeft(750, 7.5, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(750, 45, opModeIsActive(), 15);
+        driveAutoCore.revDrive(750, 24, opModeIsActive(), 23);
         armAutoCore.move(450, 970, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
         armAutoCore.move(450, 15, opModeIsActive(), 250);
         driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
         driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 5);
-        driveAutoCore.fwdDrive(750, 35.35 - 7.5, opModeIsActive(), 10);
-        driveAutoCore.strafeRight(750, 8.5 + 2.5, opModeIsActive(), 10);
+        driveAutoCore.fwdDrive(750, 35.35 - 7.5 + 1, opModeIsActive(), 10);
+        driveAutoCore.strafeRight(750, 6.5, opModeIsActive(), 10);
         armAutoCore.move(350, 705, opModeIsActive(), 100);
         servoAutoCore.lClaw.setPosition(0.65);
         sleep(750);
