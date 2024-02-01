@@ -19,7 +19,7 @@ public class ServoCore {
 
     public DrivetrainCore dTrain = new DrivetrainCore();
 
-    Boolean launched = false;
+    Boolean launched = true;
     boolean Lclawstat, Rclawstat;
 
     ElapsedTime time = new ElapsedTime(ElapsedTime.Resolution.SECONDS);
@@ -33,7 +33,7 @@ public class ServoCore {
         airplane.setDirection(Servo.Direction.REVERSE);
         rClaw.setDirection(Servo.Direction.REVERSE);
 
-        lClaw.setPosition(0.89); //(close)
+        lClaw.setPosition(0.91); //(close)
         rClaw.setPosition(0.93); //(close)
         airplane.setPosition(0.36);
     }
@@ -44,7 +44,7 @@ public class ServoCore {
         if (currentGamepad2.y && !previousGamepad2.y){
             Lclawstat = !Lclawstat;
             Rclawstat = !Rclawstat;
-            lClaw.setPosition(0.89); //(close)
+            lClaw.setPosition(0.91); //(close)
             rClaw.setPosition(0.93); //(close)
         }
         if (currentGamepad2.a && !previousGamepad2.a){
@@ -58,7 +58,7 @@ public class ServoCore {
             if(Lclawstat){
                 lClaw.setPosition(0.65); //(open)
             } else {
-                lClaw.setPosition(0.89); //(close)
+                lClaw.setPosition(0.91); //(close)
             }
         }
         if (currentGamepad2.x && !previousGamepad2.x){
@@ -73,8 +73,9 @@ public class ServoCore {
 
     public void airLaunch(Telemetry telemetry){
         if (currentGamepad.x && !previousGamepad.x){
-            airplane.setPosition(0.75);
-            launched = true;
+            launched = !launched;
+            if (launched) airplane.setPosition(0.36);
+            else airplane.setPosition(0.75);
         }
     }
 
@@ -87,7 +88,7 @@ public class ServoCore {
                 lClaw.setPosition(0.65); //(open)
                 rClaw.setPosition(0.65); //(open)
             } else {
-                lClaw.setPosition(0.89); //(close)
+                lClaw.setPosition(0.91); //(close)
                 rClaw.setPosition(0.93); //(close)
             }
         }
