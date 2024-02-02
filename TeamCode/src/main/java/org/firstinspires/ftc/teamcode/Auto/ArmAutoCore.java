@@ -7,6 +7,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class ArmAutoCore {
     public DcMotorEx arm;
+    public int armDown = 1950;
+    public int armLay = 15;
+    public int armBoard = 1600;
+
 
     public void init(HardwareMap hwMap){
         arm = hwMap.get(DcMotorEx.class, "left".toLowerCase()); //Change depending on config

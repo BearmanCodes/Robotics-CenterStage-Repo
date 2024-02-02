@@ -57,6 +57,10 @@ public class RightRedCore extends LinearOpMode {
 
     String pos;
 
+    int armDown = 1950;
+    int armLay = 15;
+    int armBoard = 1600;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -117,13 +121,13 @@ public class RightRedCore extends LinearOpMode {
         driveAutoCore.fwdDrive(750, 12, opModeIsActive(), 500);
         driveAutoCore.turnAmount(45, opModeIsActive(), telemetry);
         driveAutoCore.fwdDrive(750, 4, opModeIsActive(), 0);
-        armAutoCore.move(1000, 1950, opModeIsActive(), 0);
+        armAutoCore.move(1000, armDown, opModeIsActive(), 0);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
-        armAutoCore.move(1000, 15, opModeIsActive(), 500);
+        armAutoCore.move(1000, armLay, opModeIsActive(), 500);
         driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
         driveAutoCore.fwdDrive(750, 32.5, opModeIsActive(), 0);
         driveAutoCore.strafeLeft(750, 37.5 - 16, opModeIsActive(), 0);
-        armAutoCore.move(1000, 1600, opModeIsActive(), 0);
+        armAutoCore.move(1000, armBoard, opModeIsActive(), 0);
         servoAutoCore.lClaw.setPosition(0.65);
         armAutoCore.move(550, 15, opModeIsActive(), 0);
     }
@@ -133,14 +137,14 @@ public class RightRedCore extends LinearOpMode {
         driveAutoCore.strafeRight(750, 14, opModeIsActive(), 12);
         driveAutoCore.fwdDrive(750, 33, opModeIsActive(), 15);
         driveAutoCore.revDrive(750, 23, opModeIsActive(), 15);
-        armAutoCore.move(1000, 1950, opModeIsActive(), 250);
+        armAutoCore.move(1000, armDown, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
-        armAutoCore.move(1000, 15, opModeIsActive(), 250);
+        armAutoCore.move(1000, armLay, opModeIsActive(), 250);
         driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
         driveAutoCore.strafeRight(750, 2.5, opModeIsActive(), 5);
         driveAutoCore.fwdDrive(750, 20.85, opModeIsActive(), 10);
         driveAutoCore.strafeLeft(750, 9.5 + 2.5, opModeIsActive(), 10);
-        armAutoCore.move(1000, 1600, opModeIsActive(), 1000);
+        armAutoCore.move(1000, armBoard, opModeIsActive(), 1000);
         servoAutoCore.lClaw.setPosition(0.65);
         sleep(1000);
         armAutoCore.move(550, 15, opModeIsActive(), 250);
@@ -152,14 +156,14 @@ public class RightRedCore extends LinearOpMode {
         driveAutoCore.strafeRight(750, 5.5, opModeIsActive(), 12);
         driveAutoCore.fwdDrive(750, 45, opModeIsActive(), 15);
         driveAutoCore.revDrive(750, 24, opModeIsActive(), 15);
-        armAutoCore.move(1000, 1950, opModeIsActive(), 250);
+        armAutoCore.move(1000, armDown, opModeIsActive(), 250);
         servoAutoCore.rClaw.setPosition(0.65);  //open slightly
-        armAutoCore.move(1000, 15, opModeIsActive(), 250);
+        armAutoCore.move(1000, armLay, opModeIsActive(), 250);
         driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
         driveAutoCore.strafeRight(750, 2.5, opModeIsActive(), 5);
         driveAutoCore.fwdDrive(750, 35.35 - 7.5, opModeIsActive(), 10);
         driveAutoCore.strafeLeft(750, 8.5 + 4, opModeIsActive(), 10);
-        armAutoCore.move(1000, 1600, opModeIsActive(), 100);
+        armAutoCore.move(1000, armBoard, opModeIsActive(), 100);
         servoAutoCore.lClaw.setPosition(0.65);
         sleep(750);
         armAutoCore.move(550, 15, opModeIsActive(), 250);

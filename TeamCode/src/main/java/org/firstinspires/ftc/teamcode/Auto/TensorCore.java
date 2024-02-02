@@ -132,7 +132,7 @@ public class TensorCore {
             //-50 and +50 tolerances for positions
         }
         if (color.equalsIgnoreCase("lred")){
-            if (x >= (85 - 50) && x <= (85 + 50)){
+            if (x >= (70 - 50) && x <= (85 + 50)){
                 return "left";
             }
             if (x >= (310 - 50) && x <= (310 + 50)){
