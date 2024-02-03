@@ -51,13 +51,8 @@ public class RightRedLeft extends LinearOpMode {
         initialize();
 
         waitForStart();
-        driveAutoCore.imu.resetYaw();
-        driveAutoCore.strafeLeft(750, 6, opModeIsActive(), 12);
-        driveAutoCore.fwdDrive(750, 23, opModeIsActive(), 15);
-        driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
-        armAutoCore.move(450, 970, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.65);  //open slightly
-        armAutoCore.move(450, 15, opModeIsActive(), 250);
+        armAutoCore.move(1000, armAutoCore.armDown, opModeIsActive(), 1500);
+        armAutoCore.move(1000, armAutoCore.armLay, opModeIsActive(), 10);
         //37.5 toward outside
         //32.5 toward backboard
         //arm 714 ticks
