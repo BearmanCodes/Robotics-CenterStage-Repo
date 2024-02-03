@@ -17,7 +17,7 @@ public class DriveAutoCore {
 
     YawPitchRollAngles robotOrientation;
     public IMU imu;
-    IMU.Parameters imuparams;
+    public IMU.Parameters imuparams;
 
     static final double TicksPerRev = 560;
     static final double WheelInches = (75 / 25.4);
