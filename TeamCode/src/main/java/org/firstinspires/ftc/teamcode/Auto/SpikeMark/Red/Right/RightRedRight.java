@@ -36,7 +36,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Auto.ArmAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 import org.firstinspires.ftc.teamcode.Auto.ServoAutoCore;
-@Disabled
 @Autonomous(name="RightRedRight", group="RightRed")
 public class RightRedRight extends LinearOpMode {
 
@@ -55,17 +54,21 @@ public class RightRedRight extends LinearOpMode {
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         sleep(250);
 
-        driveAutoCore.strafeRight(750, 6, opModeIsActive(), 15);
-        driveAutoCore.fwdDrive(750, 16, opModeIsActive(), 12);
-        armAutoCore.move(500, 1350, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.20);  //open slightly
-        servoAutoCore.lClaw.setPosition(0.23);
+        driveAutoCore.imu.resetYaw();
+        driveAutoCore.strafeLeft(1500, 8, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(1500, 15, opModeIsActive(), 15);
+        driveAutoCore.turnAmount(-45, opModeIsActive(), telemetry);
+        driveAutoCore.fwdDrive(1500, 16, opModeIsActive(), 15);
+        driveAutoCore.revDrive(1500, 16, opModeIsActive(), 15);
+        driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
+        driveAutoCore.fwdDrive(1500, 20, opModeIsActive(), 10);
+        armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 100);
+        servoAutoCore.lClaw.setPosition(0.65);
+        sleep(750);
+        armAutoCore.move(550, 15, opModeIsActive(), 250);
+        driveAutoCore.strafeLeft(1500, 25, opModeIsActive(), 200);
+        driveAutoCore.fwdDrive(1500, 10, opModeIsActive(), 250);
         sleep(150);
-        armAutoCore.move(500, 150, opModeIsActive(), 250);
-        driveAutoCore.revDrive(750, 13, opModeIsActive(), 12); // Make this whatever we drove forward -2
-        driveAutoCore.strafeRight(2000, 36, opModeIsActive(), 12); //This is 42 - whatever we strafed right
-        servoAutoCore.lClaw.setPosition(0.8); //(open)
-        servoAutoCore.rClaw.setPosition(0.8); //(open)
     }
 
     private void initialize() {

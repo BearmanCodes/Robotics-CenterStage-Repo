@@ -47,13 +47,13 @@ public class ServoCore {
             lClaw.setPosition(1.00); //(close)
             rClaw.setPosition(1.00); //(close)
         }
-        if (currentGamepad2.a && !previousGamepad2.a){
+        if (currentGamepad2.a && !previousGamepad2.a && !currentGamepad2.start){
             Lclawstat = !Lclawstat;
             Rclawstat = !Rclawstat;
             lClaw.setPosition(0.65); //(open)
             rClaw.setPosition(0.65); //(open)
         }
-        if (currentGamepad2.b && !previousGamepad2.b){
+        if (currentGamepad2.b && !previousGamepad2.b && !currentGamepad2.start){
             Lclawstat = !Lclawstat;
             if(Lclawstat){
                 lClaw.setPosition(0.65); //(open)

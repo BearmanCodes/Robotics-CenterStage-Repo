@@ -57,7 +57,6 @@ public class DrivetrainCore{
         double backLeftPower = (-Pivot + Vertical + Horizontal) * reducer;
         //I don't understand any of this math but it allows the mecanum wheels to, do what they do.
 
-
         frontleft.setPower(frontLeftPower);
         frontright.setPower(frontRightPower);
         backleft.setPower(backLeftPower);
@@ -87,6 +86,7 @@ public class DrivetrainCore{
         frontleft.setDirection(DcMotorSimple.Direction.REVERSE); //Change these directions for your drive
         backright.setDirection(DcMotorSimple.Direction.FORWARD);
         backleft.setDirection(DcMotorSimple.Direction.FORWARD);
+
         tetrix.setDirection(DcMotorSimple.Direction.FORWARD);
 
         frontright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

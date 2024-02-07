@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.exception.RobotCoreException;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.checkerframework.checker.units.qual.A;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.Auto.DriveAutoCore;
 
 
@@ -53,6 +54,7 @@ public class Keep extends LinearOpMode {
             if (servoCore.currentGamepad.start && !servoCore.previousGamepad.start){
                 telemetry.addData("Drive Pos: ", dTrain.frontleft.getCurrentPosition() / TicksPerIn);
                 telemetry.addData("Arm Pos: ", armCore.actualArm.getCurrentPosition());
+                telemetry.addData("Yaw: ", dTrain.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES));
                 telemetry.update();
                 dTrain.frontleft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                 dTrain.frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -70,21 +72,19 @@ public class Keep extends LinearOpMode {
             dTrain.setMotorPower(mPower, mPower, mPower, mPower);
         } else if (gamepad1.dpad_down){
             dTrain.setMotorPower(-mPower, -mPower, -mPower, -mPower);
-        } else {
-            dTrain.setMotorPower(0, 0, 0, 0);
+        } else if (servoCore.currentGamepad.right_bumper){
+            dTrain.setMotorVelocity(600, -600, 600, -600);
+        } else if (servoCore.currentGamepad.left_bumper){
+            dTrain.setMotorVelocity(-600, 600, -600, 600);
         }
-
-        if (servoCore.currentGamepad.right_bumper && ! servoCore.previousGamepad.right_bumper){
-            dAuto.turnAmount(90, opModeIsActive(), telemetry);
-        }
-
-        if (servoCore.currentGamepad.left_bumper && ! servoCore.previousGamepad.left_bumper){
-            dAuto.turnAmount(-90, opModeIsActive(), telemetry);
+        else {
+            dTrain.allMotorPower(0);
         }
     }
 
     private void Init(){
         dTrain.init(hardwareMap);
+        dTrain.imu.resetYaw();
         armCore.init(hardwareMap);
         servoCore.init(hardwareMap);
     }

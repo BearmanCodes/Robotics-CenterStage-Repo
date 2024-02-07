@@ -90,7 +90,7 @@ public class TensorCore {
         visionPortal = builder.build();
         //Please don't change anything above this except the webcam name if needed.
         if (file.contains("Red")) tfod.setMinResultConfidence(0.6f);
-        else tfod.setMinResultConfidence(0.9f); //It's much better at detecting red's than blue so you gotta filter out the worst blue predections
+        else tfod.setMinResultConfidence(0.8f); //It's much better at detecting red's than blue so you gotta filter out the worst blue predections
     }
 
     public double telemetryTfod(Telemetry telemetry) {
@@ -149,7 +149,7 @@ public class TensorCore {
             if (x >= (285 - 50) && x <= (285 + 50)){
                 return "middle";
             }
-            if (x >= (495 - 50) && x <= (495 + 50)) {
+            if (x >= (495 - 50) && x <= (495 + 100)) {
                 return "right";
             }
         }

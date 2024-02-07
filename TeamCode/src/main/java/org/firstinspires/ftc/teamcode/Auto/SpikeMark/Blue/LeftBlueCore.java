@@ -41,7 +41,7 @@ import org.firstinspires.ftc.teamcode.Auto.TensorCore;
 //COMPLETE
 @Autonomous(name="LeftBlue", group="Blue") //Autonomous for left of the blue side
 public class LeftBlueCore extends LinearOpMode {
-    private static final String TFOD_MODEL_ASSET = "Blue.tflite";
+    private static final String TFOD_MODEL_ASSET = "Red.tflite";
     private static final String[] LABELS = {
             "Blue",
     };
@@ -118,59 +118,56 @@ public class LeftBlueCore extends LinearOpMode {
 
     public void LeftGo() throws InterruptedException {
         driveAutoCore.imu.resetYaw();
-        driveAutoCore.strafeLeft(750, 14, opModeIsActive(), 12);
-        driveAutoCore.fwdDrive(750, 22, opModeIsActive(), 15);
-        driveAutoCore.revDrive(750, 12, opModeIsActive(), 15);
-        armAutoCore.move(1000, armAutoCore.armDown, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.65);  //open slightly
-        armAutoCore.move(1000, armAutoCore.armLay, opModeIsActive(), 250);
+        driveAutoCore.strafeLeft(1500, 15, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(1500, 21, opModeIsActive(), 15);
+        driveAutoCore.revDrive(1500, 8, opModeIsActive(), 15);
         driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
-        driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 5);
-        driveAutoCore.fwdDrive(750, 20.85 + 1, opModeIsActive(), 10);
-        /*Not confident on this */ driveAutoCore.strafeRight(750, 2.5, opModeIsActive(), 10);
-        armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 1000);
+        driveAutoCore.fwdDrive(1500, 20, opModeIsActive(), 10);
+        armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 100);
         servoAutoCore.lClaw.setPosition(0.65);
-        sleep(1000);
+        sleep(750);
         armAutoCore.move(550, 15, opModeIsActive(), 250);
+        driveAutoCore.strafeLeft(1500, 15, opModeIsActive(), 200);
+        driveAutoCore.fwdDrive(1500, 10, opModeIsActive(), 250);
         sleep(150);
     }
 
     public void RightGo() throws InterruptedException{
         driveAutoCore.imu.resetYaw();
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
-        driveAutoCore.strafeLeft(750, 5, opModeIsActive(), 0);
-        driveAutoCore.fwdDrive(750, 12, opModeIsActive(), 500);
-        driveAutoCore.turnAmount(-45, opModeIsActive(), telemetry);
-        driveAutoCore.fwdDrive(750, 4, opModeIsActive(), 0);
-        armAutoCore.move(1000, armAutoCore.armDown, opModeIsActive(), 0);
-        servoAutoCore.rClaw.setPosition(0.65);  //open slightly
-        armAutoCore.move(1000, armAutoCore.armLay, opModeIsActive(), 500);
+        driveAutoCore.strafeLeft(1500, 22, opModeIsActive(), 0);
+        driveAutoCore.fwdDrive(1500, 11, opModeIsActive(), 0);
+        driveAutoCore.turnAmount(-55, opModeIsActive(), telemetry);
+        driveAutoCore.fwdDrive(1500, 27, opModeIsActive(), 0);
+        driveAutoCore.revDrive(1500, 10, opModeIsActive(), 0);
         driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
-        driveAutoCore.fwdDrive(750, 32.5, opModeIsActive(), 0);
-        driveAutoCore.strafeRight(750, 9.5 + 2.5, opModeIsActive(), 10);
-        armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 0);
+        driveAutoCore.fwdDrive(750, 27, opModeIsActive(), 0);
+        driveAutoCore.strafeRight(1500, 3, opModeIsActive(), 200);
+        armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 500);
         servoAutoCore.lClaw.setPosition(0.65);
         armAutoCore.move(550, 15, opModeIsActive(), 0);
+        driveAutoCore.strafeLeft(1500, 28, opModeIsActive(), 0);
+        driveAutoCore.fwdDrive(1500, 10, opModeIsActive(), 250);
+        sleep(150);
     }
 
     public void MiddleGo() throws InterruptedException{
         driveAutoCore.imu.resetYaw();
-        driveAutoCore.strafeLeft(750, 7.5, opModeIsActive(), 12);
-        driveAutoCore.fwdDrive(750, 45, opModeIsActive(), 15);
-        driveAutoCore.revDrive(750, 24, opModeIsActive(), 23);
-        armAutoCore.move(1000, armAutoCore.armDown, opModeIsActive(), 250);
-        servoAutoCore.rClaw.setPosition(0.65);  //open slightly
-        armAutoCore.move(1000, armAutoCore.armLay, opModeIsActive(), 250);
+        driveAutoCore.strafeLeft(1500, 8.5, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(1500, 28, opModeIsActive(), 15);
+        driveAutoCore.revDrive(1500, 8, opModeIsActive(), 15);
         driveAutoCore.turnAmount(90, opModeIsActive(), telemetry);
-        driveAutoCore.strafeLeft(750, 2.5, opModeIsActive(), 5);
-        driveAutoCore.fwdDrive(750, 35.35 - 7.5 + 1, opModeIsActive(), 10);
-        driveAutoCore.strafeRight(750, 6.5, opModeIsActive(), 10);
+        driveAutoCore.fwdDrive(1500, 26.2, opModeIsActive(), 10);
         armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 100);
         servoAutoCore.lClaw.setPosition(0.65);
         sleep(750);
         armAutoCore.move(550, 15, opModeIsActive(), 250);
+        driveAutoCore.strafeLeft(1500, 22, opModeIsActive(), 200);
+        driveAutoCore.fwdDrive(1500, 10, opModeIsActive(), 250);
         sleep(150);
     }
+    
+    //#1 thing might need to back up more when going to backboard
 
     //The auto functions depending on whether it's spike mark center, left, or middle are above
 }
