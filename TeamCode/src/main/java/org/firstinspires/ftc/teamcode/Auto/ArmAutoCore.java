@@ -11,7 +11,6 @@ public class ArmAutoCore {
     public int armLay = 15;
     public int armBoard = 1450;
 
-
     public void init(HardwareMap hwMap){
         arm = hwMap.get(DcMotorEx.class, "left".toLowerCase()); //Change depending on config
 
