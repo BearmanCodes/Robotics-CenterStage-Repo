@@ -135,25 +135,9 @@ public class RightRedCore extends LinearOpMode {
 
     public void RightGo() throws InterruptedException{
         driveAutoCore.imu.resetYaw();
-        driveAutoCore.strafeRight(1500, 15, opModeIsActive(), 12);
-        driveAutoCore.fwdDrive(1500, 21, opModeIsActive(), 15);
-        driveAutoCore.revDrive(1500, 8, opModeIsActive(), 15);
-        driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
-        driveAutoCore.fwdDrive(1500, 20, opModeIsActive(), 10);
-        armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 100);
-        servoAutoCore.lClaw.setPosition(0.65);
-        sleep(750);
-        armAutoCore.move(550, 15, opModeIsActive(), 250);
-        driveAutoCore.strafeRight(1500, 15, opModeIsActive(), 200);
-        driveAutoCore.fwdDrive(1500, 10, opModeIsActive(), 250);
-        sleep(150);
-    }
-
-    public void MiddleGo() throws InterruptedException{
-        driveAutoCore.imu.resetYaw();
-        driveAutoCore.strafeRight(1500, 8.5, opModeIsActive(), 12);
-        driveAutoCore.fwdDrive(1500, 28, opModeIsActive(), 15);
-        driveAutoCore.revDrive(1500, 8, opModeIsActive(), 15);
+        driveAutoCore.strafeRight(1500, 9, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(1500, 26, opModeIsActive(), 15);
+        driveAutoCore.revDrive(1500, 5.25, opModeIsActive(), 15);
         driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
         driveAutoCore.fwdDrive(1500, 26.2, opModeIsActive(), 10);
         armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 100);
@@ -161,6 +145,23 @@ public class RightRedCore extends LinearOpMode {
         sleep(750);
         armAutoCore.move(550, 15, opModeIsActive(), 250);
         driveAutoCore.strafeRight(1500, 22, opModeIsActive(), 200);
+        driveAutoCore.fwdDrive(1500, 10, opModeIsActive(), 250);
+        sleep(150);
+    }
+
+    public void MiddleGo() throws InterruptedException{
+        driveAutoCore.imu.resetYaw();
+        driveAutoCore.strafeRight(1500, 3.5, opModeIsActive(), 12);
+        driveAutoCore.fwdDrive(1500, 28, opModeIsActive(), 15);
+        driveAutoCore.revDrive(1500, 8, opModeIsActive(), 15);
+        driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
+        driveAutoCore.fwdDrive(1500, 26.2 + 5, opModeIsActive(), 10);
+        driveAutoCore.strafeLeft(1500, 4.5, opModeIsActive(), 10);
+        armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 100);
+        servoAutoCore.lClaw.setPosition(0.65);
+        sleep(750);
+        armAutoCore.move(550, 15, opModeIsActive(), 250);
+        driveAutoCore.strafeRight(1500, 22 + 4.5, opModeIsActive(), 200);
         driveAutoCore.fwdDrive(1500, 10, opModeIsActive(), 250);
         sleep(150);
     }
