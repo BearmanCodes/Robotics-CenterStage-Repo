@@ -118,17 +118,17 @@ public class RightRedCore extends LinearOpMode {
         driveAutoCore.imu.resetYaw();
         //super helpful drive diagram https://gm0.org/en/latest/_images/mecanum-drive-directions.png
         driveAutoCore.strafeRight(1500, 9, opModeIsActive(), 0);
-        driveAutoCore.fwdDrive(1500, 20, opModeIsActive(), 0);
+        driveAutoCore.fwdDrive(1500, 16.8, opModeIsActive(), 0);
         driveAutoCore.turnAmount(70, opModeIsActive(), telemetry);
         driveAutoCore.fwdDrive(1500, 15, opModeIsActive(), 0);
         driveAutoCore.revDrive(1500, 15, opModeIsActive(), 0);
         driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
+        driveAutoCore.strafeLeft(1500, 12, opModeIsActive(), 200);
         driveAutoCore.fwdDrive(750, 26.2 + 6 + 6.5, opModeIsActive(), 0);
-        driveAutoCore.strafeLeft(1500, 7.75, opModeIsActive(), 200);
         armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 500);
         servoAutoCore.lClaw.setPosition(0.65);
-        armAutoCore.move(550, 15, opModeIsActive(), 0);
-        driveAutoCore.strafeRight(1500, 28, opModeIsActive(), 0);
+        armAutoCore.move(550, 17, opModeIsActive(), 0);
+        driveAutoCore.strafeRight(1500, 27.5, opModeIsActive(), 0);
         driveAutoCore.fwdDrive(1500, 10, opModeIsActive(), 250);
         sleep(150);
     }
@@ -140,7 +140,7 @@ public class RightRedCore extends LinearOpMode {
         driveAutoCore.revDrive(1500, 8.25, opModeIsActive(), 15);
         driveAutoCore.turnAmount(-90, opModeIsActive(), telemetry);
         driveAutoCore.fwdDrive(1500, 26.5, opModeIsActive(), 10);
-        driveAutoCore.strafeRight(1500, 3, opModeIsActive(), 10);
+        driveAutoCore.strafeLeft(1500, 1, opModeIsActive(), 10);
         armAutoCore.move(1000, armAutoCore.armBoard, opModeIsActive(), 100);
         servoAutoCore.lClaw.setPosition(0.65);
         sleep(750);
